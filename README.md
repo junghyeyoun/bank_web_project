@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=wave&color=EACCD9&height=400&section=header&text=bank_web_project&fontSize=60&fontColor=705A64&stroke=3A2F32&strokeWidth=2&animation=twinkling)
+![header](https://capsule-render.vercel.app/api?type=Cylinder&color=1E9133&height=200&section=header&text=clover_pay&fontSize=60&fontColor=705A64&stroke=3A2F32&strokeWidth=2&animation=twinkling)
 ![image](https://github.com/jun981125/bank_web_project/assets/139423925/64dc2c69-20f4-44b3-bfa4-1c581a559617)
 ![KakaoTalk_20230714_111005657](https://github.com/jun981125/bank_web_project/assets/138744937/b9c887ec-a0fd-4fb5-bf48-428bde03daa9)
 
