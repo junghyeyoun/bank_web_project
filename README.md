@@ -1,14 +1,16 @@
 ![header](https://capsule-render.vercel.app/api?type=Cylinder&color=1E9133&height=200&section=header&text=clover_pay&fontSize=60&fontColor=705A64&stroke=3A2F32&strokeWidth=2&animation=twinkling)
 ![image](https://github.com/jun981125/bank_web_project/assets/139423925/64dc2c69-20f4-44b3-bfa4-1c581a559617)
-![KakaoTalk_20230714_111005657](https://github.com/jun981125/bank_web_project/assets/138744937/b9c887ec-a0fd-4fb5-bf48-428bde03daa9)
 
 
 # 💡 git 사용방법
-팀장(이미함) : https://uni.rejoice-it.com/m/entry/Git-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%97%B0%EB%8F%99-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-1-%ED%8C%80%EC%9E%A5 
 
-  팀원 : https://uni.rejoice-it.com/m/entry/Git-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%97%B0%EB%8F%99-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-2-%ED%8C%80%EC%9B%90
+  import : <a href="https://jin2rang.tistory.com/m/entry/GitHub%EC%97%90%EC%84%9C-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-import%ED%95%98%EA%B8%B0">import링크</a>
+
+  import하는 방법은 이걸로 해주세요 ! 나머지는 팀원보고 따라하면 될것 같습니다. 
+
+  팀원 : <a href="https://uni.rejoice-it.com/m/entry/Git-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%97%B0%EB%8F%99-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-2-%ED%8C%80%EC%9B%90">팀원링크</a>
   
-  pull&push&merge :  https://uni.rejoice-it.com/m/entry/Git-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%97%B0%EB%8F%99-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-3-pull-push
+  pull&push&merge : <a href="https://uni.rejoice-it.com/m/entry/Git-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%97%B0%EB%8F%99-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-3-pull-push">pull&push&merge링크</a>
   
   깃 안써보신거 같아서 보기 쉽게 올려드려요 ! 
 
@@ -19,8 +21,12 @@
 4. 토큰이 만료 되었을 수도 있으니까 확인해보세요. 만료되었다면 갱신하거나 삭제하고 다시 만들면 됩니당 ! 토큰은 한번만 보여주니까 꼭 복사해서 기억하기 쉬운데에 복붙해두세용 😁 ☞ https://kim-dragon.tistory.com/122
 5. 처음 import 하거나 push 하면 username과 토큰(password)를 입력해야하는데 username 기억안나시면 옆 포스팅 보고 확인해보세요 ! ☞ https://yusang.tistory.com/26
 6. main branch에서 바로 수정하지말고 다른 branch를 만들어서 수정or 추가 할텐데 각자 개인 branch를 쓰고 이름을 정합시당 >< 전 그냥 제이름으로 할까 생각중이에욥
-
+7. git ignore에 아무것도 쓰지 말기 ❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗❗
+   
   별거 아니지만 2개월동안 깃하면서 시행착오 겪었던 것들 공유합니당.. 🐷 우리팀 파이팅..  화이팅!!
+
+# 💡 기술 스택
+<svg fill="#E34F26" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>
 
 # 💡 table
 USE bank_db;
