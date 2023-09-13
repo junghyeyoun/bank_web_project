@@ -6,10 +6,6 @@
 
 # 💡 git 사용방법
 
-  import : <a href="https://jin2rang.tistory.com/m/entry/GitHub%EC%97%90%EC%84%9C-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-import%ED%95%98%EA%B8%B0">import링크</a>
-
-  import하는 방법은 이걸로 해주세요 ! 나머지는 팀원보고 따라하면 될것 같습니다. 
-
   팀원 : <a href="https://uni.rejoice-it.com/m/entry/Git-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%97%B0%EB%8F%99-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-2-%ED%8C%80%EC%9B%90">팀원링크</a>
   
   pull&push&merge : <a href="https://uni.rejoice-it.com/m/entry/Git-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%97%B0%EB%8F%99-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-3-pull-push">pull&push&merge링크</a>
