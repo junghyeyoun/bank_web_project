@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>제품 상세보기</h3>
+<table>
+	<tr>
+		<td>product id : [[${data.product_id}]]</td>
+		<td>category id : [[${data.category_id}]]</td>
+		<td>브랜드 : [[${data.brand}]]</td>
+		<td>모델 : [[${data.model}]]</td>
+		<td>가격 : [[${data.price}]]</td>
+		<td style="text-align: right;">
+			<img src="/images/ready.gif"/>
+		</td>
+	</tr>
+	<tr>
+		<td>재고량 : [[${data.stock_quantity}]]</td>
+		<td>출시일 : [[${data.release_date}]]</td>
+		<td>사양 : [[${data.specifications}]]</td>
+	</tr>
+	<tr>
+		<td>보증기간 : [[${data.warranty_period}]]</td>
+		<td>무게 : [[${data.weight}]]</td>
+		<td>수치 : [[${data.dimensions}]]</td>
+	</tr>	
+	<tr>
+		<td colspan="3">
+			<textarea ows="5" style="width: 98%" readonly="readonly">[[${data.description}]]</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td><button>장바구니에 담기</button></td>
+		<td><button>주문하기</button></td>
+	</tr>
+</table>
+
+
+<!-- 상세보기 이미지 -->
+<img src="/images/charger.jpg"/> 
+</body>
+</html>
