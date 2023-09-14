@@ -1,34 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <h3>상품목록</h3>
+
+<br>
 <table border="1">
 	<tr>
-		<th>상품id</th><th>카테고리id</th><th>브랜드</th><th>모델</th><th>가격</th><th>재고량</th><th>설명</th><th>출시일</th><th>사양</th><th>보증기간</th><th>무게</th><th>수치</th><th>자세히보기</th>
+		<th>브랜드</th><th>모델</th><th>가격</th><th>재고량</th><th>상품이미지</th><th>자세히보기</th>
 	</tr>
 	<th:block th:if="${products.size() > 0}">
 		<tr th:each="data:${products}">
-		<td th:text="${data.product_id}"></td>
-		<td th:text="${data.category_id}"></td>
 		<td th:text="${data.brand}"></td>
 		<td th:text="${data.model}"></td>
 		<td th:text="${data.price}"></td>
 		<td th:text="${data.stock_quantity}"></td>
-		<td th:text="${data.description}"></td>
-		<td th:text="${data.release_date}"></td>
-		<td th:text="${data.specifications}"></td>
-		<td th:text="${data.warranty_period}"></td>
-		<td th:text="${data.weight}"></td>
-		<td th:text="${data.dimensions}"></td>
+		<td><img src="upload/${data.pimage}"></td>
 		<td>
 			<a th:href="@{/showproduct(product_id=${data.product_id})}" th:text="상세보기"></a>
 		</td>
 		</tr>
 	</th:block>
 </table>
+
+	
+	
 </body>
 </html>

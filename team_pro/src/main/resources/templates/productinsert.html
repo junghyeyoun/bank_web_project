@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	$("#pImg")
+</script>
 <script type="text/javascript">
 window.onload = function() {
 		let btnIns = document.getElementById("btnIns");
@@ -21,8 +24,73 @@ window.onload = function() {
 			frm.model.focus();
 			return;
 		}
-		// 다른것도 추가해야함!!!!!!!
-
+		
+		if (frm.price.value === "") {
+			alert("가격을 입력하시오");
+			frm.price.focus();
+			return;
+		}
+		
+		if (frm.stock_quantity.value === "") {
+			alert("재고량을 입력하시오");
+			frm.stock_quantity.focus();
+			return;
+		}
+		
+		if (frm.stock_quantity.value === "") {
+			alert("재고량을 입력하시오");
+			frm.stock_quantity.focus();
+			return;
+		}
+		
+		if (frm.release_date.value === "") {
+			alert("출시일을 입력하시오");
+			frm.release_date.focus();
+			return;
+		}
+		
+		if (frm.specifications.value === "") {
+			alert("사양을 입력하시오");
+			frm.specifications.focus();
+			return;
+		}
+		
+		if (frm.warranty_period.value === "") {
+			alert("보증기간을 입력하시오");
+			frm.warranty_period.focus();
+			return;
+		}
+		
+		if (frm.weight.value === "") {
+			alert("무게를 입력하시오");
+			frm.weight.focus();
+			return;
+		}
+		
+		if (frm.dimensions.value === "") {
+			alert("치수를 입력하시오");
+			frm.dimensions.focus();
+			return;
+		}
+		
+		if (frm.description.value === "") {
+			alert("설명을 입력하시오");
+			frm.description.focus();
+			return;
+		}
+		
+		if (frm.pimage.value === "") {
+			alert("상품 이미지를 입력하시오");
+			frm.pimage.focus();
+			return;
+		}
+		
+		if (frm.dimage.value === "") {
+			alert("상품 상세 이미지를 입력하시오");
+			frm.dimage.focus();
+			return;
+		}
+		
 		frm.submit();
 	}	
 </script>
@@ -32,7 +100,7 @@ window.onload = function() {
 <form action="insert" method="post" name="frm">
 	<table style="width: 80%">
 		<tr>
-			<td>카테고리 아이디</td>
+			<td>카테고리 id</td>
 			<td><input type="text" name="category_id"></td>
 		</tr>
 		<tr>
@@ -50,10 +118,6 @@ window.onload = function() {
 		<tr>
 			<td>재고량</td>
 			<td><input type="text" name="stock_quantity"></td>
-		</tr>
-		<tr>
-			<td>가격</td>
-			<td><input type="text" name="price"></td>
 		</tr>
 		<tr>
 			<td>출시일</td>
@@ -78,6 +142,14 @@ window.onload = function() {
 		<tr>
 			<td>내용</td>
 			<td><textarea rows="5" style="width: 99%" name="description"></textarea></td>
+		</tr>
+		<tr>
+			<td>상품 이미지</td>
+			<td><input type="file" size="30" id="pImg" name="pimage"></td>
+		</tr>
+		<tr>
+			<td>상품 상세 이미지</td>
+			<td><input type="file" size="30" id="dImg" name="dimage"></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="text-align: center;">

@@ -20,8 +20,8 @@ public interface ProductMappingInterface {
 	
 	// 상품 등록
 	@Insert("INSERT INTO products (category_id, brand, model, price, stock_quantity, description, \r\n"
-			+ "release_date, specifications, warranty_period, weight, dimensions)\r\n"
-			+ "VALUES (#{category_id}, #{brand} #{model}, #{price}, #{stock_quantity}, #{description}, \r\n"
-			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions})")
+			+ "release_date, specifications, warranty_period, weight, dimensions, pimage, dimage)\r\n"
+			+ "VALUES (#{category_id}, #{brand}, #{model}, #{price}, #{stock_quantity}, #{description}, \r\n"
+			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage},#{dimage})")
 	int insertProduct(ProductBean bean);
 }

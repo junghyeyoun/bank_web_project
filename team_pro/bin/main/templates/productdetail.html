@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -13,9 +13,10 @@
 		<td>브랜드 : [[${data.brand}]]</td>
 		<td>모델 : [[${data.model}]]</td>
 		<td>가격 : [[${data.price}]]</td>
-		<td style="text-align: right;">
-			<img src="/images/ready.gif"/>
-		</td>
+		<td style="width:20%; text-align: right;"> 
+            <img src="/upload/'[[${data.pimage}]]'"/> <!-- 안됨 -->
+         </td>
+         <!--<td>[[${data.dimage}]]</td>-->
 	</tr>
 	<tr>
 		<td>재고량 : [[${data.stock_quantity}]]</td>
@@ -40,6 +41,6 @@
 
 
 <!-- 상세보기 이미지 -->
-<img src="/images/charger.jpg"/> 
+<img src="/images/[[${data.dimage}]]"/> 
 </body>
 </html>

@@ -34,8 +34,7 @@ public class ProductDao {
 	public boolean insert(ProductBean bean) {
 		boolean b = false;
 		int re = mappingInterface.insertProduct(bean);
-		if (re > 0)
-			b = true;
+		if (re > 0) b = true;
 		return b;
 	}
 }
