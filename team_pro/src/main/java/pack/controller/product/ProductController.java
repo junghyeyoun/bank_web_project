@@ -1,4 +1,4 @@
-package pack.controller;
+package pack.controller.product;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pack.model.ProductDao;
-import pack.model.ProductDto;
+import pack.model.product.ProductDao;
+import pack.model.product.ProductDto;
 
 @Controller
 public class ProductController {

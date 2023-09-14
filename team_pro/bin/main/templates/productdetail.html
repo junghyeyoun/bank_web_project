@@ -37,6 +37,10 @@
 		<td><button>장바구니에 담기</button></td>
 		<td><button>주문하기</button></td>
 	</tr>
+	<tr>
+		<td><a th:href="@{/update(product_id=${data.product_id})}">상품 수정</a></td>
+		<td><a th:href="@{/delete(product_id=${data.product_id})}">상품 삭제</a></td>
+	</tr>
 </table>
 
 

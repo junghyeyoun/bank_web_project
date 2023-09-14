@@ -1,4 +1,4 @@
-package pack.controller;
+package pack.controller.product;
 
 import lombok.Data;
 

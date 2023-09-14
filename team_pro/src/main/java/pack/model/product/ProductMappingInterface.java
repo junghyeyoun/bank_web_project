@@ -1,12 +1,14 @@
-package pack.model;
+package pack.model.product;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
-import pack.controller.ProductBean;
+import pack.controller.product.ProductBean;
 
 @Mapper
 public interface ProductMappingInterface {
@@ -24,4 +26,17 @@ public interface ProductMappingInterface {
 			+ "VALUES (#{category_id}, #{brand}, #{model}, #{price}, #{stock_quantity}, #{description}, \r\n"
 			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage},#{dimage})")
 	int insertProduct(ProductBean bean);
+	
+	// 상품 수정
+	@Update("update products set category_id=#{category_id}, brand=#{brand}, model=#{model}, \n"
+			+ "price=#{price}, stock_quantity=#{stock_quantity}, description=#{description},\n"
+			+ "release_date =#{release_date}, specifications=#{specifications},\n"
+			+ "warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions},\n"
+			+ "pimage=#{pimage}, dimage=#{dimage} where product_id = #{product_id}")
+	int updateProduct(ProductBean bean);
+	
+	// 상품 삭제
+	@Delete("delete from products where product_id=#{product_id}")
+	int deleteProduct(String product_id);
+	
 }

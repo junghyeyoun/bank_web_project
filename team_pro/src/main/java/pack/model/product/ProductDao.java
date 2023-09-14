@@ -1,4 +1,4 @@
-package pack.model;
+package pack.model.product;
 
 import java.util.List;
 
@@ -6,8 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import pack.controller.ProductBean;
+import pack.controller.product.ProductBean;
 
 @Repository
 public class ProductDao {
@@ -37,4 +36,23 @@ public class ProductDao {
 		if (re > 0) b = true;
 		return b;
 	}
+	
+	// 상품 수정
+	public boolean update(ProductBean bean) {
+		boolean b = false;
+		int re = mappingInterface.updateProduct(bean);
+		if (re > 0)
+			b = true;
+		return b;
+	}
+	
+	// 상품 삭제
+	public boolean delete(String product_id) {
+		boolean b = false;
+		int re = mappingInterface.deleteProduct(product_id);
+		if (re > 0)
+			b = true;
+		return b;
+	}
+	
 }
