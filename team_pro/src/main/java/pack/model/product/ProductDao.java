@@ -29,6 +29,10 @@ public class ProductDao {
 		return dto;
 	}
 	
+	public int totalCnt() {
+		return mappingInterface.totalCnt();
+	}
+	
 	// 상품 등록
 	public boolean insert(ProductBean bean) {
 		boolean b = false;

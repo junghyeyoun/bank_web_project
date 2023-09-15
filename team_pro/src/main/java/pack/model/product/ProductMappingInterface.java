@@ -24,15 +24,19 @@ public interface ProductMappingInterface {
 	@Insert("INSERT INTO products (category_id, brand, model, price, stock_quantity, description, \r\n"
 			+ "release_date, specifications, warranty_period, weight, dimensions, pimage, dimage)\r\n"
 			+ "VALUES (#{category_id}, #{brand}, #{model}, #{price}, #{stock_quantity}, #{description}, \r\n"
-			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage},#{dimage})")
+			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage}, #{dimage})")
 	int insertProduct(ProductBean bean);
+	
+	// 총 상품 수 구하기
+	@Select("select count(*) from products")
+	int totalCnt();
 	
 	// 상품 수정
 	@Update("update products set category_id=#{category_id}, brand=#{brand}, model=#{model}, \n"
 			+ "price=#{price}, stock_quantity=#{stock_quantity}, description=#{description},\n"
 			+ "release_date =#{release_date}, specifications=#{specifications},\n"
 			+ "warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions},\n"
-			+ "pimage=#{pimage}, dimage=#{dimage} where product_id = #{product_id}")
+			+ " where product_id = #{product_id}")
 	int updateProduct(ProductBean bean);
 	
 	// 상품 삭제

@@ -2,158 +2,152 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 등록</title>
 <script type="text/javascript">
 window.onload = function() {
-		let btnIns = document.getElementById("btnIns");
-		btnIns.addEventListener("click", checkData);
-	}
+    let btnIns = document.getElementById("btnIns");
+    btnIns.addEventListener("click", checkData);
+}
 
-	function checkData() {
-		if (frm.brand.value === "") {
-			alert("브랜드를 입력하시오");
-			frm.brand.focus();
-			return;
-		}
+function checkData() {
+    if (frm.brand.value === "") {
+        alert("브랜드를 입력하시오");
+        frm.brand.focus();
+        return;
+    }
 
-		if (frm.model.value === "") {
-			alert("모델을 입력하시오");
-			frm.model.focus();
-			return;
-		}
-		
-		if (frm.price.value === "") {
-			alert("가격을 입력하시오");
-			frm.price.focus();
-			return;
-		}
-		
-		if (frm.stock_quantity.value === "") {
-			alert("재고량을 입력하시오");
-			frm.stock_quantity.focus();
-			return;
-		}
-		
-		if (frm.stock_quantity.value === "") {
-			alert("재고량을 입력하시오");
-			frm.stock_quantity.focus();
-			return;
-		}
-		
-		if (frm.release_date.value === "") {
-			alert("출시일을 입력하시오");
-			frm.release_date.focus();
-			return;
-		}
-		
-		if (frm.specifications.value === "") {
-			alert("사양을 입력하시오");
-			frm.specifications.focus();
-			return;
-		}
-		
-		if (frm.warranty_period.value === "") {
-			alert("보증기간을 입력하시오");
-			frm.warranty_period.focus();
-			return;
-		}
-		
-		if (frm.weight.value === "") {
-			alert("무게를 입력하시오");
-			frm.weight.focus();
-			return;
-		}
-		
-		if (frm.dimensions.value === "") {
-			alert("치수를 입력하시오");
-			frm.dimensions.focus();
-			return;
-		}
-		
-		if (frm.description.value === "") {
-			alert("설명을 입력하시오");
-			frm.description.focus();
-			return;
-		}
-		
-		if (frm.pimage.value === "") {
-			alert("상품 이미지를 입력하시오");
-			frm.pimage.focus();
-			return;
-		}
-		
-		if (frm.dimage.value === "") {
-			alert("상품 상세 이미지를 입력하시오");
-			frm.dimage.focus();
-			return;
-		}
-		
-		frm.submit();
-	}	
+    if (frm.model.value === "") {
+        alert("모델을 입력하시오");
+        frm.model.focus();
+        return;
+    }
+
+    if (frm.price.value === "") {
+        alert("가격을 입력하시오");
+        frm.price.focus();
+        return;
+    }
+
+    if (frm.stock_quantity.value === "") {
+        alert("재고량을 입력하시오");
+        frm.stock_quantity.focus();
+        return;
+    }
+
+    if (frm.release_date.value === "") {
+        alert("출시일을 입력하시오");
+        frm.release_date.focus();
+        return;
+    }
+
+    if (frm.specifications.value === "") {
+        alert("사양을 입력하시오");
+        frm.specifications.focus();
+        return;
+    }
+
+    if (frm.warranty_period.value === "") {
+        alert("보증기간을 입력하시오");
+        frm.warranty_period.focus();
+        return;
+    }
+
+    if (frm.weight.value === "") {
+        alert("무게를 입력하시오");
+        frm.weight.focus();
+        return;
+    }
+
+    if (frm.dimensions.value === "") {
+        alert("치수를 입력하시오");
+        frm.dimensions.focus();
+        return;
+    }
+
+    if (frm.description.value === "") {
+        alert("설명을 입력하시오");
+        frm.description.focus();
+        return;
+    }
+
+    if (frm.pimage.value === "") {
+        alert("상품 이미지를 입력하시오");
+        frm.pimage.focus();
+        return;
+    }
+
+    if (frm.dimage.value === "") {
+        alert("상품 상세 이미지를 입력하시오");
+        frm.dimage.focus();
+        return;
+    }
+
+    frm.submit();
+}
 </script>
 </head>
 <body>
 <h3>상품 등록</h3>
-<form action="insert" method="post" name="frm">
-	<table style="width: 80%">
-		<tr>
-			<td>카테고리 id</td>
-			<td><input type="text" name="category_id"></td>
-		</tr>
-		<tr>
-			<td>브랜드</td>
-			<td><input type="text" name="brand"></td>
-		</tr>
-		<tr>
-			<td>모델</td>
-			<td><input type="text" name="model"></td>
-		</tr>
-		<tr>
-			<td>가격</td>
-			<td><input type="text" name="price"></td>
-		</tr>
-		<tr>
-			<td>재고량</td>
-			<td><input type="text" name="stock_quantity"></td>
-		</tr>
-		<tr>
-			<td>출시일</td>
-			<td><input type="text" name="release_date"></td>
-		</tr>
-		<tr>
-			<td>사양</td>
-			<td><input type="text" name="specifications"></td>
-		</tr>
-		<tr>
-			<td>보증기간</td>
-			<td><input type="text" name="warranty_period"></td>
-		</tr>
-		<tr>
-			<td>무게</td>
-			<td><input type="text" name="weight"></td>
-		</tr>
-		<tr>
-			<td>치수</td>
-			<td><input type="text" name="dimensions"></td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><textarea rows="5" style="width: 99%" name="description"></textarea></td>
-		</tr>
-		<tr>
-			<td>상품 이미지</td>
-			<td><input type="file" size="30" name="pimage"></td>
-		</tr>
-		<tr>
-			<td>상품 상세 이미지</td>
-			<td><input type="file" size="30" name="dimage"></td>
-		</tr>
-		<tr>
-			<td colspan="2" style="text-align: center;">
-				<input type="button" value="등록" id="btnIns" /> 
-				<input type="button" value="목록" onclick="location.href='productlist'" /></td>
-		</tr>
-	</table>
+<form action="insert" method="post" name="frm" enctype="multipart/form-data">
+    <table style="width: 80%">
+        <tr>
+            <td>카테고리 id</td>
+            <td><input type="text" name="category_id"></td>
+        </tr>
+        <tr>
+            <td>브랜드</td>
+            <td><input type="text" name="brand"></td>
+        </tr>
+        <tr>
+            <td>모델</td>
+            <td><input type="text" name="model"></td>
+        </tr>
+        <tr>
+            <td>가격</td>
+            <td><input type="text" name="price"></td>
+        </tr>
+        <tr>
+            <td>재고량</td>
+            <td><input type="text" name="stock_quantity"></td>
+        </tr>
+        <tr>
+            <td>출시일</td>
+            <td><input type="text" name="release_date"></td>
+        </tr>
+        <tr>
+            <td>사양</td>
+            <td><input type="text" name="specifications"></td>
+        </tr>
+        <tr>
+            <td>보증기간</td>
+            <td><input type="text" name="warranty_period"></td>
+        </tr>
+        <tr>
+            <td>무게</td>
+            <td><input type="text" name="weight"></td>
+        </tr>
+        <tr>
+            <td>치수</td>
+            <td><input type="text" name="dimensions"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td><textarea rows="5" style="width: 99%" name="description"></textarea></td>
+        </tr>
+        <!--<tr>
+            <td>상품 이미지</td>
+            <td><input type="file" size="30" name="pimage"></td>
+        </tr>
+        <tr>
+            <td>상품 상세 이미지</td>
+            <td><input type="file" size="30" name="dimage"></td>
+        </tr>-->
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="button" value="등록" id="btnIns" />
+                <input type="button" value="목록" onclick="location.href='productlist'" /></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
