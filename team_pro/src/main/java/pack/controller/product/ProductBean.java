@@ -10,6 +10,8 @@ import lombok.Data;
 public class ProductBean {
 	private String product_id, category_id, brand, model, price, stock_quantity, description, release_date,
 			specifications, warranty_period, weight, dimensions, pimage, dimage;
+	
+	private String searchName, searchValue;
 	// pimage, dimge는 이미지 파일명
 
 	// private MultipartFile pimage, dimage;

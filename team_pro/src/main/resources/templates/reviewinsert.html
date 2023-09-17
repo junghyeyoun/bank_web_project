@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function() {
+    let btnIns = document.getElementById("btnIns");
+    btnIns.addEventListener("click", checkData);
+}
+
+function checkData() {
+    if (frm.rating.value === "") {
+        alert("별점을 입력하시오");
+        frm.rating.focus();
+        return;
+    }
+    
+    if (frm.comment.value === "") {
+        alert("상품명을 입력하시오");
+        frm.comment.focus();
+        return;
+    }
+
+    frm.submit();
+}
+</script>
+</head>
+<body>
+<h3>리뷰 등록</h3>
+<form action="reviewinsert" method="post" name="frm" enctype="multipart/form-data">
+    <table style="width: 80%">
+        <tr>
+            <td>별점</td>
+            <td><input type="text" name="rating"></td>
+        </tr>
+        <tr>
+            <td>상품명</td>
+            <td><input type="text" name="comment"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="button" value="등록" id="btnIns" />
+                <input type="button" value="목록" onclick="location.href='reviewlist'" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

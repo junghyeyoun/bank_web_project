@@ -44,32 +44,46 @@ public class ProductListController {
 
 	// 상품 리스트보기
 	@GetMapping("productlist")
-	public String showProductList(@RequestParam("page") int page, Model model) {
-		// paging 처리
-		int spage = 0;
-		try {
-			spage = page;
-		} catch (Exception e) {
-			spage = 1;
-		}
-		if (page <= 0)
-			spage = 1;
+	public String showProductList(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+	    // paging 처리
+	    int spage = 0;
+	    try {
+	        spage = page;
+	    } catch (Exception e) {
+	        spage = 1;
+	    }
+	    if (page <= 0)
+	        spage = 1;
 
-		ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.selectAll();
-		;
-		ArrayList<ProductDto> result = getListdata(list, spage);
+	    ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.selectAll();
+	    ArrayList<ProductDto> result = getListdata(list, spage);
 
-		model.addAttribute("products", plist);
-		model.addAttribute("pagesu", getPageSu());
-		model.addAttribute("page", spage);
-		return "productlist";
+	    model.addAttribute("list", result); 
+	    model.addAttribute("pagesu", getPageSu());
+	    model.addAttribute("page", spage);
+	    return "productlist";
 	}
+
 
 	// 선택한 상품 자세히 보기
 	@GetMapping("showproduct")
-	public String showproduct(@RequestParam("product_id") String product_id, Model model) {
+	public String showproduct(@RequestParam("product_id") String product_id, @RequestParam("page") String page, Model model) {
 		model.addAttribute("data", productDao.detail(product_id));
+		model.addAttribute("page", page);
+		
 		return "productdetail";
+	}
+	
+	@GetMapping("search")
+	public String searchProcess(ProductBean bean, Model model) {
+	    System.out.println(bean.getSearchName() + " " + bean.getSearchValue()); // 검색 파라미터 확인용
+	    
+	    ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.search(bean);
+	    
+	    model.addAttribute("list", list);
+	    model.addAttribute("pagesu", getPageSu());
+	    model.addAttribute("page", "1");
+	    return "productlist";
 	}
 
 }

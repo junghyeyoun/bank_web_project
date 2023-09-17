@@ -16,11 +16,12 @@ public class ProductUpdateController {
 	private ProductDao productDao;
 	
 	@GetMapping("update")
-	public String edit(@RequestParam("product_id")String product_id, Model model) {
+	public String edit(@RequestParam("product_id")String product_id, @RequestParam("page")String page, Model model) {
 		// 수정 대상 자료 읽기
 		ProductDto dto = productDao.detail(product_id);
 		
 		model.addAttribute("data", dto);
+		model.addAttribute("page", page);
 		
 		return "productupdate";
 	}
@@ -29,7 +30,7 @@ public class ProductUpdateController {
 	public String editProcess(ProductBean bean, Model model) {
 			boolean b = productDao.update(bean);
 			if(b) {
-				return "redirect:productlist";
+				return "redirect:productdetail?product_id=" +bean.getProduct_id();
 			}else {
 				return "redirect:error";
 			}

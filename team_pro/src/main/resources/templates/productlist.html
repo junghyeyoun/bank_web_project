@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>상품목록</title>
 </head>
-
 <body>
-	<h3>상품목록</h3>
-
-	<br>
-	<table border="1">
-		<tr>
-			<th>브랜드</th>
-			<th>모델</th>
-			<th>가격</th>
-			<th>상품이미지</th>
-			<th>자세히보기</th>
-		</tr>
-		<th:block th:if="${products.size() > 0}">
-			<tr th:each="data:${products}">
-				<td th:text="${data.brand}"></td>
-				<td th:text="${data.model}"></td>
-				<td th:text="${data.price}"></td>
-				<td th:text="${data.pimage}"></td>
-				<td th:text="${data.dimage}"></td>
-				<td>
-					<a th:href="@{/showproduct(product_id=${data.product_id})}" th:text="상세보기"></a>
-				</td>
-			</tr>
-
-			<!-- paging -->
-			<tr style="text-align: center;">
-				<td colspan="5">
-					<th:block th:each="num : ${#numbers.sequence(1, pagesu)}">
-						<th:span th:if="${num} == ${page}">
-							<b th:text=${num}>num 표시(현재 페이지는 링크를 걸지 않음)</b>
-						</th:span>
-						<th:span th:if="${num} != ${page}">
-							<a th:href="@{productlist(page=${num})}" th:text="${num}">num 표시</a>
-						</th:span>
-					</th:block>
-				</td>
-			</tr>
-		</th:block>
-	</table>
-
-
-
-
+    <h3>상품목록</h3>
+    <br>
+    <table border="1">
+        <tr>
+            <th>브랜드</th>
+            <th>모델</th>
+            <th>가격</th>
+            <th>상품이미지</th>
+            <th>자세히보기</th>
+        </tr>
+        <tr th:if="${list.size() > 0}" th:each="data : ${list}">
+            <td th:text="${data.brand}"></td>
+            <td th:text="${data.model}"></td>
+            <td th:text="${data.price}"></td>
+            <td>
+                <a th:href="@{/showproduct(product_id=${data.product_id},page=${page})}" th:text="상세보기"></a>
+            </td>
+        </tr>
+        <!-- paging -->
+        <tr style="text-align: center;">
+            <td colspan="5">
+                <span th:each="num : ${#numbers.sequence(1, pagesu)}">
+    <span th:if="${num == page}">
+        <b th:text="${num}">num 표시(현재 페이지는 링크를 걸지 않음)</b>
+    </span>
+    <span th:if="${num != page}">
+        <a th:href="@{productlist(page=${num})}" th:text="${num}">num 표시</a>
+    </span>
+</span>
+            </td>
+        </tr>
+        <!-- 검색 작업 추가 -->
+	<tr style="text-align: center;">
+		<td colspan="5">
+		<br/>
+		<form action="/search" method="get">
+		  검색 대상 : 
+		  <select name="searchName">
+			<option value="brand" selected>브랜드</option>
+			<option value="model">모델</option>
+		  </select>
+		  <input type="text" name="searchValue">
+		  <input type="submit" value="검 색">
+		</form>
+		</td>
+	</tr>
+    </table>
 </body>
-
 </html>

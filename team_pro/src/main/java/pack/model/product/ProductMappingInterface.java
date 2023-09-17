@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import pack.controller.product.ProductBean;
 
+
 @Mapper
 public interface ProductMappingInterface {
 	// 전체 상품 읽기
@@ -31,12 +32,12 @@ public interface ProductMappingInterface {
 	@Select("select count(*) from products")
 	int totalCnt();
 	
+	// 상품 찾기
+	@Select("select * from products where ${searchName} like concat('%', #{searchValue}, '%')")
+	List<ProductDto> searchList(ProductBean bean);
+	
 	// 상품 수정
-	@Update("update products set category_id=#{category_id}, brand=#{brand}, model=#{model}, \n"
-			+ "price=#{price}, stock_quantity=#{stock_quantity}, description=#{description},\n"
-			+ "release_date =#{release_date}, specifications=#{specifications},\n"
-			+ "warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions},\n"
-			+ " where product_id = #{product_id}")
+	@Update("update products set category_id=#{category_id}, brand=#{brand}, model=#{model}, price=#{price}, stock_quantity=#{stock_quantity}, description=#{description}, release_date=#{release_date}, specifications=#{specifications}, warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions} where product_id=#{product_id}")
 	int updateProduct(ProductBean bean);
 	
 	// 상품 삭제
