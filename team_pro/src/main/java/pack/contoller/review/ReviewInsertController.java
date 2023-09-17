@@ -21,7 +21,7 @@ public class ReviewInsertController {
 	public String insertProcess (ReviewBean bean) {
 		boolean b = reviewDao.reviewinsert(bean);
 		if(b) {
-			return "redirect:/list?page=1";  // 추가 후 목록 보기
+			return "redirect:/reviewlist?page=1";  // 추가 후 목록 보기
 		}else {
 			return "redirect:/error";
 		}

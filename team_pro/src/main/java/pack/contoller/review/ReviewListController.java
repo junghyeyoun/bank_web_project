@@ -44,6 +44,7 @@ public class ReviewListController {
 	}
 	
 	// 상품 리스트 보기
+	@GetMapping("reviewlist")
 	public String showReviewList(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
 	    // paging 처리
 	    int spage = 0;
@@ -61,7 +62,7 @@ public class ReviewListController {
 	    model.addAttribute("list", result); 
 	    model.addAttribute("pagesu", getPageSu());
 	    model.addAttribute("page", spage);
-	    return "productlist";
+	    return "reviewlist";
 	}
 	
 	// 선택한 상품 자세히 보기
@@ -70,7 +71,7 @@ public class ReviewListController {
 		model.addAttribute("data", reviewDao.detail(review_id));
 		model.addAttribute("page", page);
 		
-		return "productdetail";
+		return "reviewdetail";
 	}
 	
 	

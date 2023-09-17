@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class ReviewDto {
-	private String review_id, customer_id, product_id, rating, review_date;
+	private String review_id, customer_id, product_id, rating, comment, review_date;
 }
