@@ -49,29 +49,10 @@ public class ProductDao {
 
 	// 상품 등록
 	public boolean insert(@ModelAttribute("bean") ProductBean bean, @RequestParam("pimagePath") MultipartFile pimagePath) throws Exception {
-	    String oriPimage = pimagePath.getOriginalFilename();
-	    String projectPath = "C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload";
-
-	    UUID uuid = UUID.randomUUID();
-	    String savedFileName = uuid + "_" + oriPimage;
-
-	    File saveFile = new File(projectPath, savedFileName);
-
-	    try {
-	        pimagePath.transferTo(saveFile);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return false; // 파일 저장 실패 시 false 반환
-	    }
-
-	    bean.setPimage(savedFileName);
-	    bean.setPimagePath("/upload/" + savedFileName);
-
-	    boolean b = false;
-	    int re = mappingInterface.insertProduct(bean);
-	    if (re > 0)
-	        b = true;
-	    return b;
+	   
+	    mappingInterface.insertProduct(bean);
+	   
+	    return true;
 	}
 
 	// 상품 수정

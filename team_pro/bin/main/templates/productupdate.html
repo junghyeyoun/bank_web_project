@@ -17,13 +17,9 @@ function chkUpData(){
 </head>
 <body>
 <h3>상품 수정</h3>
-<form action="update" method="post" name="upFrm" th:object="${data}">
-	<input type="hidden" th:field="*{product_id}">
+<form action="@{/update(product_id=${data.product_id},page=${page})}" method="post" name="upFrm" th:object="${data}">
+	 <input type="hidden" name="product_id" th:value="*{product_id}" />
 	<table border="1" style="width: 80%">
-		<tr>
-			<td>카테고리 id</td>
-			<td><input type="text" th:field="*{product_id}"></td>
-		</tr>
 		<tr>
 			<td>브랜드</td>
 			<td><input type="text" th:field="*{brand}"></td>

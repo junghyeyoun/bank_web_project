@@ -16,7 +16,7 @@ public class ProductBean {
 	private String searchName, searchValue;
 	
 
-	private String pimagePath;
+	private MultipartFile pimagePath;
 	// 이미지 조회경로
 
 }

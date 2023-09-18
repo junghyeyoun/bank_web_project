@@ -37,7 +37,7 @@ public interface ProductMappingInterface {
 	List<ProductDto> searchList(ProductBean bean);
 	
 	// 상품 수정
-	@Update("update products set category_id=#{category_id}, brand=#{brand}, model=#{model}, price=#{price}, stock_quantity=#{stock_quantity}, description=#{description}, release_date=#{release_date}, specifications=#{specifications}, warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions} where product_id=#{product_id}")
+	@Update("update products set brand=#{brand}, model=#{model}, price=#{price}, stock_quantity=#{stock_quantity}, description=#{description}, release_date=#{release_date}, specifications=#{specifications}, warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions} where product_id=#{product_id}")
 	int updateProduct(ProductBean bean);
 	
 	// 상품 삭제

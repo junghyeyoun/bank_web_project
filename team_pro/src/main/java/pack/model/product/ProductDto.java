@@ -10,6 +10,6 @@ public class ProductDto {
 	specifications, warranty_period, weight, dimensions, pimage;
 // pimage, dimge는 이미지 파일명
 
- private String pimagePath;
+ private MultipartFile pimagePath;
 // 이미지 조회경로
 }
