@@ -27,10 +27,11 @@ public class ProductUpdateController {
 	}
 	
 	@PostMapping("update")
-	public String editProcess(ProductBean bean, Model model) {
+	public String editProcess(@RequestParam("product_id") String product_id, ProductBean bean, Model model) {
 			boolean b = productDao.update(bean);
 			if(b) {
-				return "redirect:productdetail?product_id=" +bean.getProduct_id();
+				// 404 error
+				return "redirect:productdetail?product_id=" + product_id;
 			}else {
 				return "redirect:error";
 			}
