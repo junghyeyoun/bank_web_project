@@ -23,9 +23,9 @@ public interface ProductMappingInterface {
 	
 	// 상품 등록
 	@Insert("INSERT INTO products (category_id, brand, model, price, stock_quantity, description, \r\n"
-			+ "release_date, specifications, warranty_period, weight, dimensions, pimage, dimage)\r\n"
+			+ "release_date, specifications, warranty_period, weight, dimensions, pimage)\r\n"
 			+ "VALUES (#{category_id}, #{brand}, #{model}, #{price}, #{stock_quantity}, #{description}, \r\n"
-			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage}, #{dimage})")
+			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage})")
 	int insertProduct(ProductBean bean);
 	
 	// 총 상품 수 구하기

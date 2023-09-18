@@ -19,6 +19,7 @@
             <td th:text="${data.brand}"></td>
             <td th:text="${data.model}"></td>
             <td th:text="${data.price}"></td>
+            <td> <img th:src="@{${data.pimage}}" /> </td>
             <td>
                 <a th:href="@{/showproduct(product_id=${data.product_id},page=${page})}" th:text="상세보기"></a>
             </td>

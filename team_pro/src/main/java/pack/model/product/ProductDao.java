@@ -1,11 +1,17 @@
 package pack.model.product;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import pack.controller.product.ProductBean;
 
@@ -42,12 +48,30 @@ public class ProductDao {
 	}
 
 	// 상품 등록
-	public boolean insert(ProductBean bean) {
-		boolean b = false;
-		int re = mappingInterface.insertProduct(bean);
-		if (re > 0)
-			b = true;
-		return b;
+	public boolean insert(@ModelAttribute("bean") ProductBean bean, @RequestParam("pimagePath") MultipartFile pimagePath) throws Exception {
+	    String oriPimage = pimagePath.getOriginalFilename();
+	    String projectPath = "C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload";
+
+	    UUID uuid = UUID.randomUUID();
+	    String savedFileName = uuid + "_" + oriPimage;
+
+	    File saveFile = new File(projectPath, savedFileName);
+
+	    try {
+	        pimagePath.transferTo(saveFile);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false; // 파일 저장 실패 시 false 반환
+	    }
+
+	    bean.setPimage(savedFileName);
+	    bean.setPimagePath("/upload/" + savedFileName);
+
+	    boolean b = false;
+	    int re = mappingInterface.insertProduct(bean);
+	    if (re > 0)
+	        b = true;
+	    return b;
 	}
 
 	// 상품 수정
