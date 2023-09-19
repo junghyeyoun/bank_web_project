@@ -18,12 +18,8 @@ public class ReviewDao {
 	private ReviewMappingInterface reviewMappingInterface;
 	
 	// 리뷰 등록
-	public boolean reviewinsert(ReviewBean bean) {
-		boolean b = false;
-		int re = reviewMappingInterface.insertReview(bean);
-		if (re > 0)
-			b = true;
-		return b;
+	public void reviewinsert(ReviewBean bean) {
+		reviewMappingInterface.insertReview(bean);
 	}
 	
 	// 전체 리뷰 읽기

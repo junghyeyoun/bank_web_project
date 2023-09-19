@@ -14,7 +14,7 @@ import pack.controller.product.ProductBean;
 @Mapper
 public interface ProductMappingInterface {
 	// 전체 상품 읽기
-	@Select("select * from products")
+	@Select("SELECT * FROM products ORDER BY product_id DESC")
 	List<ProductDto> selectAll();
 	
 	// 해당 상품 상세 보기 
@@ -23,9 +23,9 @@ public interface ProductMappingInterface {
 	
 	// 상품 등록
 	@Insert("INSERT INTO products (category_id, brand, model, price, stock_quantity, description, \r\n"
-			+ "release_date, specifications, warranty_period, weight, dimensions, pimage)\r\n"
+			+ "release_date, specifications, warranty_period, weight, dimensions, pimage, dimage)\r\n"
 			+ "VALUES (#{category_id}, #{brand}, #{model}, #{price}, #{stock_quantity}, #{description}, \r\n"
-			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage})")
+			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage},#{dimage})")
 	int insertProduct(ProductBean bean);
 	
 	// 총 상품 수 구하기
@@ -37,7 +37,7 @@ public interface ProductMappingInterface {
 	List<ProductDto> searchList(ProductBean bean);
 	
 	// 상품 수정
-	@Update("update products set brand=#{brand}, model=#{model}, price=#{price}, stock_quantity=#{stock_quantity}, description=#{description}, release_date=#{release_date}, specifications=#{specifications}, warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions} where product_id=#{product_id}")
+	@Update("update products set brand=#{brand}, model=#{model}, price=#{price}, stock_quantity=#{stock_quantity}, description=#{description}, release_date=#{release_date}, specifications=#{specifications}, warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions}, pimage=#{pimage}, dimage=#{dimage}  where product_id=#{product_id}")
 	int updateProduct(ProductBean bean);
 	
 	// 상품 삭제

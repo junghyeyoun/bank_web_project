@@ -9,14 +9,14 @@ import lombok.Data;
 @Component
 public class ProductBean {
 	private String product_id, category_id, brand, model, price, stock_quantity, description, release_date,
-			specifications, warranty_period, weight, dimensions, pimage;
+			specifications, warranty_period, weight, dimensions, pimage, dimage;
 	// pimage, dimge는 이미지 파일명
 	
 
 	private String searchName, searchValue;
 	
 
-	private MultipartFile pimagePath;
+	private MultipartFile pimagePath, dimagePath;
 	// 이미지 조회경로
 
 }

@@ -48,11 +48,9 @@ public class ProductDao {
 	}
 
 	// 상품 등록
-	public boolean insert(@ModelAttribute("bean") ProductBean bean, @RequestParam("pimagePath") MultipartFile pimagePath) throws Exception {
+	public void insert(ProductBean bean) {
 	   
 	    mappingInterface.insertProduct(bean);
-	   
-	    return true;
 	}
 
 	// 상품 수정

@@ -18,7 +18,8 @@ function chkUpData(){
 <body>
 <h3>상품 수정</h3>
 <form action="update" method="post" name="upFrm" th:object="${data}">
-	 <input type="hidden" name="product_id" th:value="*{product_id}" />
+	 <input type="hidden" th:field="*{product_id}" />
+	 <input type="hidden" name="page" th:value="${page}">
 	<table border="1" style="width: 80%">
 		<tr>
 			<td>브랜드</td>
@@ -62,14 +63,14 @@ function chkUpData(){
 			 <textarea rows="5" style="width: 99%" th:field="*{description}"></textarea>		
 			</td>
 		</tr>
-	<!--	<tr>
+		<tr>
 			<td>상품 이미지</td>
-			<td><input type="text" size="30" name="pimage"></td>
+			<td><input type="file" name="uppimagePath"></td>
 		</tr>
 		<tr>
 			<td>상품 상세 이미지</td>
-			<td><input type="text" size="30" name="dimage"></td>
-		</tr>-->
+			<td><input type="file" name="updimagePath"></td>
+		</tr>
 		<tr>
 			<td colspan="2" style="text-align: center;">
 				<input type="button" value="수정" id="btnUp" /> 
