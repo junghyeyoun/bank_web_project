@@ -23,12 +23,12 @@ public class ProductInsertController {
 	@Autowired
 	private ProductDao productDao;
 
-	@GetMapping("insert") 
+	@GetMapping("productinsert") 
 	public String insertform() {
 		return "productinsert";
 	}
 
-	@PostMapping("insert")
+	@PostMapping("productinsert")
 	public String insertProcess(ProductBean bean, Model model, BindingResult result) throws Exception{
 
 	// 판매자만 가능 추가해야함

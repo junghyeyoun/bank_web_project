@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import pack.controller.product.ProductBean;
 import pack.controller.review.ReviewBean;
 import pack.model.product.ProductDto;
 
@@ -33,7 +34,7 @@ public class ReviewDao {
 	}
 	
 	// 해당 리뷰 상세 보기
-	public ReviewDto detail(String review_id) {
+	public ReviewDto detail(int review_id) {
 		ReviewDto dto = reviewMappingInterface.selectOne(review_id);
 		return dto;
 	}
@@ -41,4 +42,23 @@ public class ReviewDao {
 	public int totalCnt() {
 		return reviewMappingInterface.totalCnt();
 	}
+	
+	// 리뷰 수정
+	public boolean update(ReviewBean bean) {
+		boolean b = false;
+		int re = reviewMappingInterface.updateReview(bean); 
+		if (re > 0)
+			b = true;
+		return b;
+	}
+	
+	// 리뷰 삭제
+	public boolean delete(int review_id) {
+		boolean b = false;
+		int re = reviewMappingInterface.deleteReview(review_id);
+		if (re > 0)
+			b = true;
+		return b;
+	}
+	
 }

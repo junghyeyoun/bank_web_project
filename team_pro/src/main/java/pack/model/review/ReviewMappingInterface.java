@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import pack.controller.review.ReviewBean;
 
@@ -23,16 +24,18 @@ public interface ReviewMappingInterface {
 	
 	// 해당 리뷰 자세히 보기
 	@Select("select a.product_id, review_id, model, brand, rating, comment, review_date, rimage from reviews a left outer join products b on a.product_id = b.product_id where review_id = #{review_id}")
-	ReviewDto selectOne(String review_id);
+	ReviewDto selectOne(int review_id);
 	
-	// 총 리뷰 수 구하기
+	// 총 리뷰 수 구하기 (페이징 처리를 위해)
 	@Select("select count(*) from reviews")
 	int totalCnt();
 	
 	// 리뷰 수정
+	@Update("update reviews set rating=#{rating}, comment=#{comment}, review_date=#{review_date}, rimage=#{rimage} where review_id=#{review_id}")
+	int updateReview(ReviewBean bean);
 	
 	// 리뷰 삭제
 	@Delete("delete from reviews where review_id=#{review_id}")
-	int deleteReview(String review_id);
+	int deleteReview(int review_id);
 	
 }

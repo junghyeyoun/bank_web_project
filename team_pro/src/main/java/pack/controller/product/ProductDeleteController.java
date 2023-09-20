@@ -17,7 +17,7 @@ public class ProductDeleteController {
     @Autowired
     private ProductDao productDao;
 
-    @GetMapping("/delete")
+    @GetMapping("/productdelete")
     public String delete(@RequestParam("product_id") int product_id, @RequestParam("page") String page, RedirectAttributes redirectAttributes) {
         try {
             if (!confirmDeletion()) {

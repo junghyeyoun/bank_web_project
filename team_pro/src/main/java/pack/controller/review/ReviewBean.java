@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Data
 public class ReviewBean {
-	private String review_id, customer_id,rating, comment, review_date, rimage,  model, brand;
-	private int product_id;
+	private String rating, comment, review_date, rimage,  model, brand;
+	private int product_id, review_id, customer_id;
 	private MultipartFile rimagePath;
 	public void setReview_date() {
 		LocalDate localDate = LocalDate.now();
