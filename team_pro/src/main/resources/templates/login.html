@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <link rel="stylesheet" type="text/css" href="css/loginstyle.css">
+   <script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+// 메시지 창 띄우기
+$(document).ready(function() {
+	let message = "[[${msg}]]";
+		if (message != "") {
+			alert(message);
+		}else {
+	}
+})
+</script>
+<script>
+$(document).ready(function() {
+	$("#btnLogin").prop("disabled", true);
+
+// 입력 할때 마다 함수 호출
+$("input").on("input", function() {
+	// 아이디와 비밀번호 입력 필드의 값 가져오기
+	var customernicknameValue = $("#customernickname").val();
+	var passwordhashValue = $("#passwordhash").val();
+
+		// 입력 필드가 비어 있지 않으면 로그인 버튼 활성화, 그렇지 않으면 비활성화
+		if (customernicknameValue !== "" && passwordhashValue !== "") {
+			$("#btnLogin").prop("disabled", false);
+		} else {
+			$("#btnLogin").prop("disabled", true);
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<form action="/login" method="post">
+    <div class="login-container"> <!-- 콘텐츠를 수직 가운데로 정렬하는 부모 컨테이너 -->
+        <div class="login-form"> <!-- 로그인 폼 영역 -->
+                <div class="input-container"> <!-- 아이디와 비밀번호 입력 필드를 감싸는 컨테이너 -->
+                    <div class="username-field"> <!-- 아이디 입력 필드 -->
+                        <div class="input-wrapper">
+                            <input data-testid="input-box" id="customernickname" name="customernickname" placeholder="아이디를 입력해주세요" type="text"
+                                class="input-field" autocomplete="on"  >	<!-- 자동 완성 활성화 -->
+                        </div>
+                    </div>
+                    <div class="password-field"> <!-- 비밀번호 입력 필드 -->
+                        <div class="input-wrapper">
+                            <input data-testid="input-box" id="passwordhash" name="passwordhash" placeholder="비밀번호를 입력해주세요"
+                                type="password" autocomplete="off" class="input-field"  >
+                        </div>
+                    </div>
+                </div>
+                <div class="link-container"> <!-- 아이디/비밀번호 찾기 링크 영역 -->
+                    <a href="/id_search" class="find-username-link">아이디 찾기</a>
+                    	<span class="divider"></span>
+                    <a href="/passwd_search" class="find-password-link">비밀번호 찾기</a>
+                </div>
+                <div class="button-container"> <!-- 로그인/회원가입 버튼 영역 -->
+    <div class="g-recaptcha" data-sitekey="6Ld0kB8oAAAAADfsQ_vx2tZL7Y1EqpNlJ1Au437I"></div>
+                    <button class="login-button" type="submit" height="54" radius="3" id="btnLogin">
+                        <span class="button-text">로그인</span>
+                    </button>
+                    </form>
+                    
+                    
+                    <a href="/register" method="post">회원가입</a>
+                </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

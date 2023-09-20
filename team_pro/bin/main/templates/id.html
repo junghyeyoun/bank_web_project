@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기 결과</title>
+</head>
+<body>
+    <div class="result-container">
+        <h1>아이디 찾기 결과</h1>
+        <p>찾은 아이디: <span th:text="${foundNickname}"></span></p>
+        <p>찾은 비밀번호: <span th:text="${foundPassword}"></span></p>
+        <p>로그인하려면 <a href="/login">여기를 클릭하세요</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zipcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("detailaddress").focus();
+            }
+        }).open();
+    }
+</script>
+<script>
+    function sample6_execDaumPostcode1() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress1").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress1").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zipcode1').value = data.zonecode;
+                document.getElementById("address1").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("detailaddress1").focus();
+            }
+        }).open();
+    }
+</script>
+<script th:inline="javascript">
+    const nicknameCheck = () => {
+        const nickname = document.getElementById("customernickname").value;
+        const checkResult = document.getElementById("check-result");
+        const btnJoin = document.getElementById("btnJoin");
+        $.ajax({
+            // 요청방식: post, url: "email-check", 데이터: 이메일
+            type: "post",
+            url: "nickname-Check",
+            data: {
+                "customernickname": nickname
+            },
+            success: function(res) {
+                if (res == "ok") {
+                    checkResult.style.color = "green";
+                    checkResult.style.fontSize = "13px";
+                    checkResult.innerHTML = "아이디 사용 가능";
+                    btnJoin.disabled = false;
+                } else {
+                    checkResult.style.color = "red";
+                    checkResult.style.fontSize = "13px";
+                    checkResult.innerHTML = "다른 아이디를 입력해주세요";
+                	btnJoin.disabled = true;
+                }
+            },
+            error: function(err) {
+                console.log("에러발생", err);
+            }
+        });
+    }
+    
+    
+    
+    const nicknameCheck1 = () => {
+        const nickname = document.getElementById("customernickname1").value;
+        const checkResult2 = document.getElementById("check-result2");
+        const btnJoin = document.getElementById("btnJoin1");
+        $.ajax({
+            // 요청방식: post, url: "email-check", 데이터: 이메일
+            type: "post",
+            url: "nickname-Check1",
+            data: {
+                "customernickname": nickname
+            },
+            success: function(res) {
+                if (res == "ok") {
+                    checkResult2.style.color = "green";
+                    checkResult2.style.fontSize = "13px";
+                    checkResult2.innerHTML = "아이디 사용 가능";
+                    btnJoin.disabled = false;
+                } else {
+                    checkResult2.style.color = "red";
+                    checkResult2.style.fontSize = "13px";
+                    checkResult2.innerHTML = "다른 아이디를 입력해주세요";
+                	btnJoin.disabled = true;
+                }
+            },
+            error: function(err) {
+                console.log("에러발생", err);
+            }
+        });
+    }
+    
+    
+// 휴대전화 번호 입력 필드를 떠날 때 호출되는 함수
+const phonenumberCheck = () => {
+    const phone = document.getElementById("phonenumber").value;
+    const phoneCheckResult = document.getElementById("check-result1");
+    const btnJoin = document.getElementById("btnJoin");
+
+    $.ajax({
+        type: "post",
+        url: "phone-Check",
+        data: {
+            "phonenumber": phone
+        },
+        success: function(res) {
+            if (res == "ok") {
+                phoneCheckResult.style.color = "green";
+                phoneCheckResult.style.fontSize = "13px";
+                phoneCheckResult.innerHTML = "사용 가능한 휴대전화 번호";
+            } else {
+                phoneCheckResult.style.color = "red";
+                phoneCheckResult.style.fontSize = "13px";
+                phoneCheckResult.innerHTML = "다른 휴대전화 번호를 입력해주세요";
+            }
+        },
+        error: function(err) {
+            console.log("에러 발생", err);
+        }
+    });
+}
+
+const phonenumberCheck1 = () => {
+    const phone = document.getElementById("phonenumber1").value;
+    const phoneCheckResult3 = document.getElementById("check-result3");
+    const btnJoin = document.getElementById("btnJoin1");
+
+    $.ajax({
+        type: "post",
+        url: "phone-Check1",
+        data: {
+            "phonenumber": phone
+        },
+        success: function(res) {
+            if (res == "ok") {
+                phoneCheckResult3.style.color = "green";
+                phoneCheckResult3.style.fontSize = "13px";
+                phoneCheckResult3.innerHTML = "사용 가능한 휴대전화 번호";
+            } else {
+                phoneCheckResult3.style.color = "red";
+                phoneCheckResult3.style.fontSize = "13px";
+                phoneCheckResult3.innerHTML = "다른 휴대전화 번호를 입력해주세요";
+            }
+        },
+        error: function(err) {
+            console.log("에러 발생", err);
+        }
+    });
+}
+</script>
+ <script type="text/javascript">
+	 // 비밀번호와 비밀번호 확인 체크
+    function test() {
+      var p1 = document.getElementById('passwordhash').value;
+      var p2 = document.getElementById('pwd').value;
+      if( p1 != p2 ) {
+        alert("비밀번호가 일치 하지 않습니다");
+        return false;
+      } else{
+        return true;
+      }
+
+    }
+  </script>
+   <script type="text/javascript">
+	 // 비밀번호와 비밀번호 확인 체크
+    function test1() {
+      var p1 = document.getElementById('passwordhash1').value;
+      var p2 = document.getElementById('pwd1').value;
+      if( p1 != p2 ) {
+        alert("비밀번호가 일치 하지 않습니다");
+        return false;
+      } else{
+        return true;
+      }
+
+    }
+  </script>
+</head>
+<body>
+    <div class="centered-button-container">
+        <button class="register-button" id="customer">일반 구매자 회원가입</button> &nbsp;&nbsp;
+        <button class="register-button2" id="seller">판매자 회원가입</button>
+    </div>
+    <div id="registrationForm" style="display: none;">
+		<!-- 구매자 회원가입 -->
+		<div id="wrapper">
+		<!-- 내용-->
+		<form th:action="@{/register}" method="post" modelAttribute="userDto">
+		<div id="content">
+			<!-- 아이디 입력란 -->
+			<div>
+				<!-- 아이디 라벨 -->
+				<h3 class="join_title">
+					<label for="id">*아이디</label>
+					<label class="fil">*표시는 필수 입력란입니다</label>
+				</h3>
+				<!-- 아이디 입력 필드 -->
+				<span class="box int_id">
+					<input type="text" name="customernickname" id="customernickname" 
+					class="int" onkeyup="nicknameCheck()"  placeholder="아이디 입력은 필수입니다 (5자 ~ 20자)">
+					<!-- 아이디 형식 -->
+					<p id="check-result" class="step_url" ></p>
+				</span>
+			</div>
+
+			<!-- 비밀번호 입력란 -->
+			<div>
+				<!-- 비밀번호 라벨 -->
+				<h3 class="join_title"><label for="pswd1">*비밀번호 (영문,특수문자,숫자 포함)</label>
+				</h3>
+				<!-- 비밀번호 입력 필드 -->
+				<span class="box int_pass">
+					<input type="password" name="passwordhash" id="passwordhash" class="int" placeholder="비밀번호 입력은 필수입니다 (5자 ~ 16자)">
+				</span>
+			</div>
+
+			<!-- 비밀번호 확인 입력란 -->
+			<div>
+				<!-- 비밀번호 재확인 라벨 -->
+				<h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
+				<!-- 비밀번호 재확인 입력 필드 -->
+				<span class="box int_pass_check">
+					<input type="password" onblur="test()" name="pwd" id="pwd" class="int" maxlength="20" placeholder="비밀번호 확인">
+				</span>
+			</div>
+
+			<!-- 이름 입력란 -->
+			<div>
+				<!-- 이름 라벨 -->
+				<h3 class="join_title"><label for="name">*이름</label></h3>
+				<!-- 이름 입력 필드 -->
+				<span class="box int_name">
+					<input type="text" name="customername" id="customername" class="int" placeholder="이름 입력은 필수입니다">
+				</span>
+			</div>
+
+
+
+			<!-- 성별 선택 -->
+			<div>
+				<!-- 성별 라벨 -->
+				<h3 class="join_title"><label for="gender">성별</label></h3>
+				<!-- 성별 선택 필드 -->
+				<span class="box gender_code">
+					<select name="customergen" id="customergen" class="sel">
+						<option>성별</option>
+						<option value="남성">남자</option>
+						<option value="여성">여자</option>
+					</select>
+				</span>
+			</div>
+
+			<!-- 이메일 입력란 -->
+			<div>
+				<!-- 이메일 라벨 -->
+				<h3 class="join_title"><label for="email">본인확인 이메일<span class="optional"> (선택)</span></label></h3>
+				<!-- 이메일 입력 필드 -->
+				<span class="box int_email">
+					<input type="text" name="email" id="email" class="int" maxlength="100" placeholder="선택입력">
+				</span>
+			</div>
+
+			
+			<!-- 휴대전화 입력란 -->
+			<div>
+				<!-- 휴대전화 라벨 -->
+				<h3 class="join_title"><label for="phoneNo">*휴대전화</label></h3>
+				<!-- 휴대전화 입력 필드 -->
+				<span class="box int_mobile">
+					<input type="tel" name="phonenumber" id="phonenumber" class="int" maxlength="16" placeholder="휴대전화번호 입력은 필수입니다"
+					onkeyup="phonenumberCheck()">
+					<p id="check-result1" class="step_url" ></p>
+				</span>
+			</div>
+				
+				<!-- 주소 라벨 -->
+    <h3 class="join_title"><label for="addr1">주소</label></h3>
+        <input type="text" name="zipcode" id="zipcode" class="d_form mini" placeholder="우편번호">
+        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="d_btn">
+        <input type="text" name="address" id="address" class="d_form large" placeholder="주소">
+        <div class="input-container">
+            <input type="text"  name="detailaddress" id="detailaddress" class="d_form" placeholder="상세주소">
+            <input type="text" id="sample6_extraAddress" class="d_form1" placeholder="참고항목">
+        </div>
+				
+			<!-- 가입 버튼 -->
+			<div class="button-blank">
+                    <button class="button-style" name="btnJoin" id="btnJoin" type="submit" disabled="" radius="4">
+                        <span class="button-text">가입하기</span>
+                    </button>
+                </div>
+		</div>
+</form>
+		<!-- 내용 -->
+
+	</div>
+</div>
+    
+    <!-- 판매자 회원가입 -->
+    <div id="namePhoneForm" style="display: none;">
+	
+	<div id="wrapper">
+		<!-- 내용-->
+		<form th:action="@{/register}" method="post">
+		<div id="content">
+			<!-- 아이디 입력란 -->
+			<div>
+				<!-- 아이디 라벨 -->
+				<h3 class="join_title">
+					<label for="id">*아이디</label>
+					<label class="fil">*표시는 필수 입력란입니다</label>
+				</h3>
+				<!-- 아이디 입력 필드 -->
+				<span class="box int_id">
+					<input type="text" name="customernickname" id="customernickname1" 
+					class="int" onkeyup="nicknameCheck1()"  placeholder="아이디 입력은 필수입니다 (5자 ~ 20자)">
+					<!-- 아이디 형식 -->
+					<p id="check-result2" class="step_url" ></p>
+				</span>
+			</div>
+
+			<!-- 비밀번호 입력란 -->
+			<div>
+				<!-- 비밀번호 라벨 -->
+				<h3 class="join_title"><label for="pswd1">*비밀번호 (영문,특수문자,숫자 포함)</label>
+				</h3>
+				<!-- 비밀번호 입력 필드 -->
+				<span class="box int_pass">
+					<input type="password" name="passwordhash" id="passwordhash1" class="int" placeholder="비밀번호 입력은 필수입니다 (5자 ~ 16자)">
+				</span>
+			</div>
+
+			<!-- 비밀번호 확인 입력란 -->
+			<div>
+				<!-- 비밀번호 재확인 라벨 -->
+				<h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
+				<!-- 비밀번호 재확인 입력 필드 -->
+				<span class="box int_pass_check">
+					<input type="password" onblur="test1()" name="pwd" id="pwd1" class="int" maxlength="20" placeholder="비밀번호 확인">
+				</span>
+			</div>
+
+			<!-- 이름 입력란 -->
+			<div>
+				<!-- 이름 라벨 -->
+				<h3 class="join_title"><label for="name">*대표자 (실명)</label></h3>
+				<!-- 이름 입력 필드 -->
+				<span class="box int_name">
+					<input type="text" name="customername" id="customername1" class="int" placeholder="대표자 이름 입력은 필수입니다">
+				</span>
+			</div>
+
+			<!-- 이름 입력란 -->
+			<div>
+				<!-- 이름 라벨 -->
+				<h3 class="join_title"><label for="name">*사업자 등록번호</label></h3>
+				<!-- 이름 입력 필드 -->
+				<span class="box int_name">
+					<input type="text" name="aa" id="aa" class="int" placeholder="사업자 등록번호 10자리 입력" maxlength="10">
+				</span>
+			</div>
+  <label>
+        <input type="radio" name="isSeller" value="true"> 판매 회원
+    </label>
+    <label>
+        <input type="radio" name="isSeller" value="false"> 일반 회원
+    </label>
+
+
+			<!-- 성별 선택 -->
+			<div>
+				<!-- 성별 라벨 -->
+				<h3 class="join_title"><label for="gender">성별</label></h3>
+				<!-- 성별 선택 필드 -->
+				<span class="box gender_code">
+					<select name="customergen" id="customergen" class="sel">
+						<option>성별</option>
+						<option value="남성">남자</option>
+						<option value="여성">여자</option>
+					</select>
+				</span>
+			</div>
+
+			<!-- 이메일 입력란 -->
+			<div>
+				<!-- 이메일 라벨 -->
+				<h3 class="join_title"><label for="email">본인확인 이메일<span class="optional"> (선택)</span></label></h3>
+				<!-- 이메일 입력 필드 -->
+				<span class="box int_email">
+					<input type="text" name="email" id="email" class="int" maxlength="100" placeholder="선택입력">
+				</span>
+			</div>
+
+			
+			<!-- 휴대전화 입력란 -->
+			<div>
+				<!-- 휴대전화 라벨 -->
+				<h3 class="join_title"><label for="phoneNo">*휴대전화</label></h3>
+				<!-- 휴대전화 입력 필드 -->
+				<span class="box int_mobile">
+					<input type="tel" name="phonenumber" id="phonenumber1" class="int" maxlength="16" placeholder="휴대전화번호 입력은 필수입니다"
+					onkeyup="phonenumberCheck1()">
+					<p id="check-result3" class="step_url" ></p>
+				</span>
+			</div>
+				
+				<!-- 주소 라벨 -->
+    <h3 class="join_title"><label for="addr1">주소</label></h3>
+        <input type="text" name="zipcode" id="zipcode1" class="d_form mini" placeholder="우편번호">
+        <input type="button" onclick="sample6_execDaumPostcode1()" value="우편번호 찾기" class="d_btn">
+        <input type="text" name="address" id="address1" class="d_form large" placeholder="주소">
+        <div class="input-container">
+            <input type="text"  name="detailaddress" id="detailaddress1" class="d_form" placeholder="상세주소">
+            <input type="text" id="sample6_extraAddress1" class="d_form1" placeholder="참고항목">
+        </div>
+				
+			<!-- 가입 버튼 -->
+			<div class="button-blank">
+                    <button class="button-style" name="btnJoin" id="btnJoin1" type="submit" disabled="" radius="4">
+                        <span class="button-text">가입하기</span>
+                    </button>
+                </div>
+		</div>
+</form>
+	</div>
+</div>   
+    <script>
+        // 버튼 1을 클릭하면 회원가입 양식을 표시하고 버튼 2의 양식을 숨김
+        document.getElementById("customer").addEventListener("click", function() {
+            document.getElementById("registrationForm").style.display = "block";
+            document.getElementById("namePhoneForm").style.display = "none";
+        });
+        
+        // 버튼 2를 클릭하면 이름 및 휴대전화 양식을 표시하고 버튼 1의 양식을 숨김
+        document.getElementById("seller").addEventListener("click", function() {
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("namePhoneForm").style.display = "block";
+        });
+    </script>
+     <script>
+ const btn1 = document.getElementById('customer');
+        const btn2 = document.getElementById('seller');
+
+        btn1.addEventListener('click', () => {
+            // 첫 번째 버튼 클릭 시, 첫 번째 버튼을 활성화하고 두 번째 버튼 비활성화
+            btn1.classList.add('active');
+            btn2.classList.remove('active');
+        });
+
+        btn2.addEventListener('click', () => {
+            // 두 번째 버튼 클릭 시, 두 번째 버튼을 활성화하고 첫 번째 버튼 비활성화
+            btn2.classList.add('active');
+            btn1.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
