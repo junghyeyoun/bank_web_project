@@ -31,33 +31,14 @@
 
 <body>
 	<h3>리뷰 등록</h3>
-	<form class="mb-3" action="reviewinsert" name="frm" id="frm" method="post" enctype="multipart/form-data">
-                  <fieldset>
-                     <span class="text-bold"></span>
-                     
-                     <input type="radio" name="rating"
-                        th:id="'rate5_' + ${iterStat.index + 1}" value="5" />
-                     <label th:for="'rate5_' + ${iterStat.index + 1}">★</label>
-
-                     <input type="radio" name="rating"
-                        th:id="'rate4_' + ${iterStat.index + 1}" value="4" />
-                     <label th:for="'rate4_' + ${iterStat.index + 1}">★</label>
-
-                     <input type="radio" name="rating"
-                        th:id="'rate3_' + ${iterStat.index + 1}" value="3" />
-                     <label th:for="'rate3_' + ${iterStat.index + 1}">★</label>
-
-                     <input type="radio" name="rating"
-                        th:id="'rate2_' + ${iterStat.index + 1}" value="2" />
-                     <label th:for="'rate2_' + ${iterStat.index + 1}">★</label>
-
-                     <input type="radio" name="rating"
-                        th:id="'rate1_' + ${iterStat.index + 1}" value="1" />
-                     <label th:for="'rate1_' + ${iterStat.index + 1}">★</label>
-                     <!-- id의 값이 똑같으면 동시에 다른 행들의 별점들 중복선택이 불가해서 id값 따로 -->
-                  </fieldset>
+	<form action="reviewinsert" name="frm" method="post" enctype="multipart/form-data">
+                  
                  <input type="hidden" name="product_id" th:value="${product_id}" />
 		<table style="width: 80%">
+			<tr>
+				<td>별점</td>
+				<td><input type="text" name="rating"/> </td>
+			</tr>
 			<tr>
 				<td>상품평</td>
 				<td><textarea type="text" name="comment"></textarea></td>
