@@ -56,10 +56,12 @@ function deleteProduct() {
 		<td><a th:href="@{/update(product_id=${data.product_id},page=${page})}">상품 수정</a></td>
     <td><a href="javascript:void(0);" onclick="deleteProduct()">상품 삭제</a></td>
 	</tr>
-	<!--<tr>
-		<a th:href="@{/reivewinsert(product_id=${data.product_id},page=${page]})}">리뷰쓰기</a>
-	</tr>-->
+	<tr>
+		<a th:href="@{/reviewinsert(product_id=${data.product_id})}">리뷰쓰기</a>
+	</tr>
 </table>
+
+<br>
 <img th:src="@{upload/}+${data.dimage}"/>
 </body>
 </html>

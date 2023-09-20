@@ -29,7 +29,7 @@ public class ProductInsertController {
 	}
 
 	@PostMapping("insert")
-	public String insertProcess(@ModelAttribute("bean") ProductBean bean, Model model, BindingResult result) throws Exception{
+	public String insertProcess(ProductBean bean, Model model, BindingResult result) throws Exception{
 
 	// 판매자만 가능 추가해야함
 	
@@ -44,23 +44,24 @@ public class ProductInsertController {
 		String filename1 = file1.getOriginalFilename();
 		String filename2 = file2.getOriginalFilename();
 		if (result.hasErrors()) {
-			return "err"; // 에러 발생 (파일을 선택하지 않은 경우)시 수행
+			return "err"; 
 		}
 		
 		try {
 			inputStream1 = file1.getInputStream();
 			inputStream2 = file2.getInputStream();
-			File newFile1 = new File("C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename1); // 절대경로로 찍기
-			File newFile2 = new File("C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename2);
+			File newFile1 = new File("C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename1); // 절대경로로 찍기
+			File newFile2 = new File("C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename2);
 			if(!newFile1.exists()) {
 				newFile1.createNewFile();
+			}
+			if(!newFile2.exists()) {
 				newFile2.createNewFile();
 			}
 			outputStream1 = new FileOutputStream(newFile1);
 			outputStream2 = new FileOutputStream(newFile2);
 			int read = 0;
-			byte[] bytes = new byte[1024];
-			// -1 끝을 의미
+			byte[] bytes = new byte[1024];  // -1 끝을 의미
 			while((read = inputStream1.read(bytes))!=-1) {
 				outputStream1.write(bytes,0,read);
 			}
@@ -72,7 +73,6 @@ public class ProductInsertController {
 			productDao.insert(bean);
 		} catch (Exception e) {
 			System.out.println("file submit err : "+e);
-			return "err";
 		} finally {
 			try {
 				inputStream1.close();

@@ -12,8 +12,8 @@ import pack.contoller.review.ReviewBean;
 @Mapper
 public interface ReviewMappingInterface {
 	// 리뷰 등록
-	@Insert("INSERT INTO reviews (rating, comment, rimage)\r\n"
-			+ "VALUES ( #{rating}, #{comment}, #{rimage})")
+	@Insert("INSERT INTO reviews (product_id,rating, comment, rimage)\r\n"
+			+ "VALUES ( #{product_id}, #{rating}, #{comment}, #{rimage})")
 	int insertReview(ReviewBean bean);
 	
 	// 리뷰 목록 보기
