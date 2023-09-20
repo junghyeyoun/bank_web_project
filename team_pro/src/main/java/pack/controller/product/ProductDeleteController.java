@@ -18,7 +18,7 @@ public class ProductDeleteController {
     private ProductDao productDao;
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("product_id") String product_id, @RequestParam("page") String page, RedirectAttributes redirectAttributes) {
+    public String delete(@RequestParam("product_id") int product_id, @RequestParam("page") String page, RedirectAttributes redirectAttributes) {
         try {
             if (!confirmDeletion()) {
                 // 사용자가 삭제를 취소한 경우

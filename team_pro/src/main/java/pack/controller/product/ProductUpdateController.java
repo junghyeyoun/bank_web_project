@@ -16,7 +16,7 @@ public class ProductUpdateController {
 	private ProductDao productDao;
 	
 	@GetMapping("update")
-	public String edit(@RequestParam("product_id")String product_id, @RequestParam("page")String page, Model model) {
+	public String edit(@RequestParam("product_id")int product_id, @RequestParam("page")String page, Model model) {
 		// 수정 대상 자료 읽기
 		ProductDto dto = productDao.detail(product_id);
 		
@@ -27,7 +27,7 @@ public class ProductUpdateController {
 	}
 	
 	@PostMapping("update")
-	public String editProcess(@RequestParam("product_id") String product_id, @RequestParam("page")String page, ProductBean bean, Model model) {
+	public String editProcess(@RequestParam("product_id") int product_id, @RequestParam("page")String page, ProductBean bean, Model model) {
 			boolean b = productDao.update(bean);
 			if(b) {
 				// 404 error

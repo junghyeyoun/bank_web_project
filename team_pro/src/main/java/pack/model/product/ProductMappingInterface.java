@@ -19,7 +19,7 @@ public interface ProductMappingInterface {
 	
 	// 해당 상품 상세 보기 
 	@Select("select * from products where product_id=#{product_id}")
-	ProductDto selectOne(String product_id);
+	ProductDto selectOne(int product_id);
 	
 	// 상품 등록
 	@Insert("INSERT INTO products (category_id, brand, model, price, stock_quantity, description, \r\n"
@@ -42,6 +42,6 @@ public interface ProductMappingInterface {
 	
 	// 상품 삭제
 	@Delete("delete from products where product_id=#{product_id}")
-	int deleteProduct(String product_id);
+	int deleteProduct(int product_id);
 	
 }

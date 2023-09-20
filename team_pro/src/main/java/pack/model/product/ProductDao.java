@@ -31,7 +31,7 @@ public class ProductDao {
 	}
 
 	// 해당 상품 상세 보기
-	public ProductDto detail(String product_id) {
+	public ProductDto detail(int product_id) {
 		ProductDto dto = mappingInterface.selectOne(product_id);
 		return dto;
 	}
@@ -63,7 +63,7 @@ public class ProductDao {
 	}
 
 	// 상품 삭제
-	public boolean delete(String product_id) {
+	public boolean delete(int product_id) {
 		boolean b = false;
 		int re = mappingInterface.deleteProduct(product_id);
 		if (re > 0)
