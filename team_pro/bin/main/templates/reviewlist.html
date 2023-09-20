@@ -9,15 +9,15 @@
 <br>
     <table border="1">
         <tr>
-            <th>리뷰아이디</th>
+            <th>상품id</th>
             <th>별점</th>
             <th>등록일</th>
             <th>상세보기</th>
         </tr>
         <tr th:if="${list.size() > 0}" th:each="data : ${list}">
-          <!--  <td th:text="${data.brand}"></td>
-            <td th:text="${data.model}"></td>-->
-           <!-- <td th:text="${data.price}"></td>-->
+			<td th:text="${data.product_id}"></td>
+			<span th:utext="${'&#9733;' * data.rating}"></span>
+			<td th:text="${data.review_date}"></td>
             <td>
                 <a th:href="@{/showreview(review_id=${data.review_id},page=${page})}" th:text="상세보기"></a>
             </td>

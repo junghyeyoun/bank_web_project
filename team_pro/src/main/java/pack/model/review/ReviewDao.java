@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import pack.contoller.review.ReviewBean;
+import pack.controller.review.ReviewBean;
 import pack.model.product.ProductDto;
 
 @Repository
@@ -18,14 +18,17 @@ public class ReviewDao {
 	private ReviewMappingInterface reviewMappingInterface;
 	
 	// 리뷰 등록
-	public void reviewinsert(ReviewBean bean) {
-		reviewMappingInterface.insertReview(bean);
+	public boolean reviewinsert(ReviewBean bean) {
+		boolean b = false;
+		int re = reviewMappingInterface.insertReview(bean);
+		if(re>0) b = true;
+		return b;
 	}
 	
 	// 전체 리뷰 읽기
 	public List<ReviewDto> selectAll() {
 		List<ReviewDto> list = reviewMappingInterface.selectAll();
-		logger.info("읽은 상품 수 : " + list.size());
+		logger.info("읽은 리뷰 수 : " + list.size());
 		return list;
 	}
 	

@@ -11,11 +11,6 @@
 		}
 
 		function checkData() {
-			if (frm.brand.value === "") {
-				alert("브랜드를 입력하시오");
-				frm.brand.focus();
-				return;
-			}
 
 			if (frm.model.value === "") {
 				alert("모델을 입력하시오");
@@ -34,55 +29,18 @@
 				frm.stock_quantity.focus();
 				return;
 			}
-
-			if (frm.release_date.value === "") {
-				alert("출시일을 입력하시오");
-				frm.release_date.focus();
-				return;
-			}
-
-			if (frm.specifications.value === "") {
-				alert("사양을 입력하시오");
-				frm.specifications.focus();
-				return;
-			}
-
-			if (frm.warranty_period.value === "") {
-				alert("보증기간을 입력하시오");
-				frm.warranty_period.focus();
-				return;
-			}
-
-			if (frm.weight.value === "") {
-				alert("무게를 입력하시오");
-				frm.weight.focus();
-				return;
-			}
-
-			if (frm.dimensions.value === "") {
-				alert("치수를 입력하시오");
-				frm.dimensions.focus();
-				return;
-			}
-
-			if (frm.description.value === "") {
-				alert("설명을 입력하시오");
-				frm.description.focus();
-				return;
-			}
-			/*
-				if (frm.pimage.value === "") {
+				if (frm.pimagePath.value === "") {
 					alert("상품 이미지를 입력하시오");
-					frm.pimage.focus();
+					frm.pimagePath.focus();
 					return;
 				}
 			
-				if (frm.dimage.value === "") {
+				if (frm.dimagePath.value === "") {
 					alert("상품 상세 이미지를 입력하시오");
-					frm.dimage.focus();
+					frm.dimagePath.focus();
 					return;
 				}
-				*/
+				
 
 			frm.submit();
 		}
@@ -113,31 +71,6 @@
 				<td>재고량</td>
 				<td><input type="text" name="stock_quantity"></td>
 			</tr>
-			<tr>
-				<td>출시일</td>
-				<td><input type="text" name="release_date"></td>
-			</tr>
-			<tr>
-				<td>사양</td>
-				<td><input type="text" name="specifications"></td>
-			</tr>
-			<tr>
-				<td>보증기간</td>
-				<td><input type="text" name="warranty_period"></td>
-			</tr>
-			<tr>
-				<td>무게</td>
-				<td><input type="text" name="weight"></td>
-			</tr>
-			<tr>
-				<td>치수</td>
-				<td><input type="text" name="dimensions"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea rows="5" style="width: 99%" name="description"></textarea></td>
-			</tr>
-
 			<tr>
 				<td>상품 이미지</td>
 				<td><input type="file" size="30" name="pimagePath"></td>

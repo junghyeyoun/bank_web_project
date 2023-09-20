@@ -28,21 +28,12 @@ function deleteProduct() {
 		<td>category id : [[${data.category_id}]]</td>
 		<td>브랜드 : [[${data.brand}]]</td>
 		<td>모델 : [[${data.model}]]</td>
-		<td>가격 : [[${data.price}]]</td>
+		<td>가격 : [[${data.price}]] 원</td>
+		<td>재고량 : [[${data.stock_quantity}]] 개</td>
 		<td> 
             <img th:src="@{upload/}+${data.pimage}" /> 
          </td>
 	</tr>
-	<tr>
-		<td>재고량 : [[${data.stock_quantity}]]</td>
-		<td>출시일 : [[${data.release_date}]]</td>
-		<td>사양 : [[${data.specifications}]]</td>
-	</tr>
-	<tr>
-		<td>보증기간 : [[${data.warranty_period}]]</td>
-		<td>무게 : [[${data.weight}]]</td>
-		<td>수치 : [[${data.dimensions}]]</td>
-	</tr>	
 	<tr>
 		<td colspan="3">
 			<textarea ows="5" style="width: 98%" readonly="readonly">[[${data.description}]]</textarea>

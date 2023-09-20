@@ -23,7 +23,7 @@ public class ProductInsertController {
 	@Autowired
 	private ProductDao productDao;
 
-	@GetMapping("insert")
+	@GetMapping("insert") 
 	public String insertform() {
 		return "productinsert";
 	}
@@ -50,8 +50,8 @@ public class ProductInsertController {
 		try {
 			inputStream1 = file1.getInputStream();
 			inputStream2 = file2.getInputStream();
-			File newFile1 = new File("C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename1); // 절대경로로 찍기
-			File newFile2 = new File("C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename2);
+			File newFile1 = new File("C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename1); // 절대경로로 찍기
+			File newFile2 = new File("C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename2);
 			if(!newFile1.exists()) {
 				newFile1.createNewFile();
 			}

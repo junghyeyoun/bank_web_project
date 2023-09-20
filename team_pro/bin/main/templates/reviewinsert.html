@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
@@ -11,37 +11,49 @@
 		}
 
 		function checkData() {
-			if (frm.rating.value === "") {
+			if (myform.rating.value === "") {
 				alert("별점을 입력하시오");
-				frm.rating.focus();
+				myform.rating.focus();
 				return;
 			}
 
-			if (frm.comment.value === "") {
+			if (myform.comment.value === "") {
 				alert("상품평을 입력하시오");
-				frm.comment.focus();
+				myform.comment.focus();
 				return;
 			}
 
-			frm.submit();
+			myform.submit();
 		}
-		
+
 	</script>
+	<link href="../css/review.css" rel="stylesheet" />
 </head>
 
 <body>
 	<h3>리뷰 등록</h3>
-	<form action="reviewinsert" name="frm" method="post" enctype="multipart/form-data">
-                  
-                 <input type="hidden" name="product_id" th:value="${product_id}" />
+	<form class="mb-3" action="reviewinsert" name="myform" id="myform" method="post" enctype="multipart/form-data">
 		<table style="width: 80%">
+			<input type="hidden" name="product_id" th:value="${product_id}" />
 			<tr>
-				<td>별점</td>
-				<td><input type="text" name="rating"/> </td>
+				<td>상품 아이디 : [[${product_id}]]</td>
+			</tr>
+			<tr>
+				<td>
+					<fieldset>
+						<span class="text-bold">별점을 선택해주세요</span>
+						<input type="radio" name="rating" value="5" id="rate1"><label for="rate1">★</label>
+						<input type="radio" name="rating" value="4" id="rate2"><label for="rate2">★</label>
+						<input type="radio" name="rating" value="3" id="rate3"><label for="rate3">★</label>
+						<input type="radio" name="rating" value="2" id="rate4"><label for="rate4">★</label>
+						<input type="radio" name="rating" value="1" id="rate5"><label for="rate5">★</label>
+					</fieldset>
+				</td>
 			</tr>
 			<tr>
 				<td>상품평</td>
-				<td><textarea type="text" name="comment"></textarea></td>
+				<td><textarea id="reviewContents" placeholder="상품에 대한 평가를 남겨주세요"
+						type="text" name="comment"></textarea></td>
 			</tr>
 			<tr>
 				<td>리뷰 이미지</td>
@@ -54,8 +66,8 @@
 				</td>
 			</tr>
 		</table>
-               </form>
-	
+	</form>
+
 </body>
 
 </html>

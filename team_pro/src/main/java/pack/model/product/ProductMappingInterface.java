@@ -22,10 +22,8 @@ public interface ProductMappingInterface {
 	ProductDto selectOne(int product_id);
 	
 	// 상품 등록
-	@Insert("INSERT INTO products (category_id, brand, model, price, stock_quantity, description, \r\n"
-			+ "release_date, specifications, warranty_period, weight, dimensions, pimage, dimage)\r\n"
-			+ "VALUES (#{category_id}, #{brand}, #{model}, #{price}, #{stock_quantity}, #{description}, \r\n"
-			+ "#{release_date}, #{specifications}, #{warranty_period}, #{weight}, #{dimensions}, #{pimage},#{dimage})")
+	@Insert("INSERT INTO products (category_id, brand, model, price, stock_quantity,pimage, dimage)\r\n"
+			+ "VALUES (#{category_id}, #{brand}, #{model}, #{price}, #{stock_quantity}, #{pimage},#{dimage})")
 	int insertProduct(ProductBean bean);
 	
 	// 총 상품 수 구하기
@@ -37,7 +35,7 @@ public interface ProductMappingInterface {
 	List<ProductDto> searchList(ProductBean bean);
 	
 	// 상품 수정
-	@Update("update products set brand=#{brand}, model=#{model}, price=#{price}, stock_quantity=#{stock_quantity}, description=#{description}, release_date=#{release_date}, specifications=#{specifications}, warranty_period=#{warranty_period}, weight=#{weight}, dimensions=#{dimensions}, pimage=#{pimage}, dimage=#{dimage}  where product_id=#{product_id}")
+	@Update("update products set brand=#{brand}, model=#{model}, price=#{price}, stock_quantity=#{stock_quantity}, pimage=#{pimage}, dimage=#{dimage}  where product_id=#{product_id}")
 	int updateProduct(ProductBean bean);
 	
 	// 상품 삭제

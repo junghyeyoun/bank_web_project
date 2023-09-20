@@ -1,4 +1,4 @@
-package pack.contoller.review;
+package pack.controller.review;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,12 +24,14 @@ public class ReviewInsertController {
 	private ReviewDao reviewDao;
 	
 	@GetMapping("reviewinsert")
-	public String insert () {	
+	public String insert (@RequestParam("product_id") int product_id, Model model) {	
+		model.addAttribute("product_id",product_id);
 		return "reviewinsert";
 	}
 	
 	@PostMapping("reviewinsert")
-	public String insertProcess (@RequestParam("product_id") int product_id, @Validated ReviewBean bean, BindingResult result, Model model) throws Exception {
+	public String insertProcess (@RequestParam("product_id") int product_id, ReviewBean bean, BindingResult result, Model model) throws Exception {
+		bean.setReview_date();
 	    InputStream inputStream = null;
 	    OutputStream outputStream = null;
 
@@ -43,7 +45,7 @@ public class ReviewInsertController {
 
 	    try {
 	        inputStream = file.getInputStream();
-	        File newFile = new File("C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename);
+	        File newFile = new File("C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename);
 	        if (!newFile.exists()) {
 	            newFile.createNewFile();
 	        }
@@ -53,9 +55,6 @@ public class ReviewInsertController {
 	        while ((read = inputStream.read(bytes)) != -1) {
 	            outputStream.write(bytes, 0, read);
 	        }
-	        bean.setProduct_id(product_id);
-	        bean.setRimage(filename);
-	        reviewDao.reviewinsert(bean);
 	    } catch (Exception e) {
 	        System.out.println("file submit err : " + e);
 	    } finally {
@@ -66,9 +65,18 @@ public class ReviewInsertController {
 	            // 예외 처리 코드
 	        }
 	    }
+	   
+        bean.setProduct_id(product_id);
+        bean.setRimage(filename);
+       
+        boolean b =  reviewDao.reviewinsert(bean);
+        if(b) {
+        	return "redirect:reviewlist";
+        } else {
+        	return "redirect:error";
+        }
+	  
 	    
-	    model.addAttribute("list",bean);
-	    return "redirect:/reviewlist";
 	}
 
 }
