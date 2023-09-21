@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-
 <head>
 	<meta charset="UTF-8">
+	<link href="../css/reviewstar.css" rel="stylesheet" />
 	<title>Insert title here</title>
 	<script type="text/javascript">
 		window.onload = function () {
@@ -27,16 +27,15 @@
 		}
 
 	</script>
-	<link href="../css/review.css" rel="stylesheet" />
 </head>
 
 <body>
 	<h3>리뷰 등록</h3>
 	<form class="mb-3" action="reviewinsert" name="myform" id="myform" method="post" enctype="multipart/form-data">
 		<table style="width: 80%">
-			<input type="hidden" name="product_id" th:value="${product_id}" />
+			<input type="hidden" name="productId" th:value="${productId}" />
 			<tr>
-				<td>상품 아이디 : [[${product_id}]]</td>
+				<td>상품 아이디 : [[${productId}]]</td>
 			</tr>
 			<tr>
 				<td>
@@ -52,12 +51,12 @@
 			</tr>
 			<tr>
 				<td>상품평</td>
-				<td><textarea id="reviewContents" placeholder="상품에 대한 평가를 남겨주세요"
-						type="text" name="comment"></textarea></td>
+				<td><textarea id="reviewContents" placeholder="상품에 대한 평가를 남겨주세요" type="text" name="comment"></textarea>
+				</td>
 			</tr>
 			<tr>
 				<td>리뷰 이미지</td>
-				<td><input type="file" size="30" name="rimagePath"></td>
+				<td><input type="file" name="rimagePath"></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;">

@@ -1,57 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-window.onload = function(){
-	document.querySelector("#btnUp").onclick = chkUpData;	
-}
 
-function chkUpData(){
-	if(confirm("정말 수정할까요?")){
-		upFrm.submit();
-	}
-}
-</script>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		window.onload = function () {
+			document.querySelector("#btnUp").onclick = chkUpData;
+		}
+
+		function chkUpData() {
+			if (confirm("정말 수정할까요?")) {
+				upFrm.submit();
+			}
+		}
+	</script>
 </head>
+
 <body>
-<h3>상품 수정</h3>
-<form action="productupdate" method="post" name="upFrm" th:object="${data}">
-	 <input type="hidden" th:field="*{product_id}" />
-	 <input type="hidden" name="page" th:value="${page}">
-	<table border="1" style="width: 80%">
-		<tr>
-			<td>브랜드</td>
-			<td><input type="text" th:field="*{brand}"></td>
-		</tr>
-		<tr>
-			<td>모델</td>
-			<td><input type="text" th:field="*{model}"></td>
-		</tr>
-		<tr>
-			<td>가격</td>
-			<td><input type="text" th:field="*{price}"></td>
-		</tr>
-		<tr>
-			<td>재고량</td>
-			<td><input type="text" th:field="*{stock_quantity}"></td>
-		</tr>
-	<!--	<tr>
-			<td>상품 이미지</td>
-			<td><input type="file" name="uppimagePath"></td>
-		</tr>
-		<tr>
-			<td>상품 상세 이미지</td>
-			<td><input type="file" name="updimagePath"></td>
-		</tr>-->
-		<tr>
-			<td colspan="2" style="text-align: center;">
-				<input type="button" value="수정" id="btnUp" /> 
-				<input type="button" value="목록" th:onclick="|location.href='@{productlist}'|" />
-			</td>
-		</tr>
-	</table>
-</form>
+	<h3>상품 수정</h3>
+	<form action="productupdate" method="post" name="upFrm" th:object="${data}" enctype="multipart/form-data">
+		<input type="hidden" th:field="*{productId}" />
+		<input type="hidden" name="page" th:value="${page}">
+		<input type="hidden" th:field="*{pimage}" />
+		<input type="hidden" th:field="*{dimage}" />
+		<table border="1" style="width: 80%">
+			<tr>
+				<td>브랜드</td>
+				<td><input type="text" th:field="*{brand}"></td>
+			</tr>
+			<tr>
+				<td>모델</td>
+				<td><input type="text" th:field="*{model}"></td>
+			</tr>
+			<tr>
+				<td>가격</td>
+				<td><input type="text" th:field="*{price}"></td>
+			</tr>
+			<tr>
+				<td>재고량</td>
+				<td><input type="text" th:field="*{stockQuantity}"></td>
+			</tr>
+			<tr>
+				<td>상품 이미지</td>
+				<td><input type="file" name="pimagePath"></td>
+			</tr>
+			<tr>
+				<td>상품 상세 이미지</td>
+				<td><input type="file" name="dimagePath"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<input type="button" value="수정" id="btnUp" />
+					<input type="button" value="목록" th:onclick="|location.href='@{productlist}'|" />
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
+
 </html>

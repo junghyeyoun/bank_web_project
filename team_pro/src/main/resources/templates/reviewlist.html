@@ -34,13 +34,13 @@
         <th>상세보기</th>
     </tr>
     <tr th:if="${list.size() > 0}" th:each="data : ${list}">
-        <td th:text="${data.product_id}"></td>
+        <td th:text="${data.productId}"></td>
         <td th:text="${data.model}"></td>
         <td th:text="${data.brand}"></td>
         <td class="rating" th:text="${data.rating}"></td>
-        <td th:text="${data.review_date}"></td>
+        <td th:text="${data.reviewDate}"></td>
         <td>
-            <a th:href="@{/showreview(review_id=${data.review_id},page=${page})}" th:text="상세보기"></a>
+            <a th:href="@{/showreview(reviewId=${data.reviewId},page=${page})}" th:text="상세보기"></a>
         </td>
     </tr>
     <!-- paging -->
@@ -57,6 +57,5 @@
         </td>
 </table>
 <br>
-<a th:href="reviewinsert">리뷰 등록</a>
 </body>
 </html>

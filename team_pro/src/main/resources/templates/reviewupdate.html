@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="../css/reviewstar.css" rel="stylesheet" />
 <script type="text/javascript">
 window.onload = function(){
 	document.querySelector("#btnUp").onclick = chkUpData;	
@@ -14,12 +15,12 @@ function chkUpData(){
 	}
 }
 </script>
-<link href="../css/review.css" rel="stylesheet" />
 </head>
 <body>
 <h3>리뷰 수정</h3>
-<form action="reviewupdate" method="post" name="upFrm" th:object="${data}">
-	 <input type="hidden" th:field="*{review_id}" />
+<form action="reviewupdate" method="post" id="myform" name="upFrm" th:object="${data}" enctype="multipart/form-data">
+	 <input type="hidden" th:field="*{reviewId}" />
+	 <input type="hidden" th:field="*{rimage}" />
 	 <input type="hidden" name="page" th:value="${page}">
 	<table border="1" style="width: 80%">
 		<tr>
@@ -36,10 +37,10 @@ function chkUpData(){
 			<td>상품평</td>
 			<td><input type="text" th:field="*{comment}"></td>
 		</tr>
-	<!--	<tr>
+		<tr>
 			<td>리뷰 이미지</td>
-			<td><input type="file" name="rimage"></td>
-		</tr>-->
+			<td><input type="file" name="rimagePath"></td>
+		
 		<tr>
 			<td colspan="2" style="text-align: center;">
 				<input type="button" value="수정" id="btnUp" /> 
