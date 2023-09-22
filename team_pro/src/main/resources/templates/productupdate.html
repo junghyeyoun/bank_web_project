@@ -20,7 +20,7 @@
 <body>
 	<h3>상품 수정</h3>
 	<form action="productupdate" method="post" name="upFrm" th:object="${data}" enctype="multipart/form-data">
-		<input type="hidden" th:field="*{productId}" />
+		<input type="hidden" th:field="*{productid}" />
 		<input type="hidden" name="page" th:value="${page}">
 		<input type="hidden" th:field="*{pimage}" />
 		<input type="hidden" th:field="*{dimage}" />
@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 				<td>재고량</td>
-				<td><input type="text" th:field="*{stockQuantity}"></td>
+				<td><input type="text" th:field="*{stockquantity}"></td>
 			</tr>
 			<tr>
 				<td>상품 이미지</td>

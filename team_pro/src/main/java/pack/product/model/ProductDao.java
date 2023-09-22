@@ -31,8 +31,8 @@ public class ProductDao {
 	}
 
 	// 해당 상품 상세 보기
-	public ProductDto detail(int productId) {
-		ProductDto dto = mappingInterface.selectOne(productId);
+	public ProductDto detail(int productid) {
+		ProductDto dto = mappingInterface.selectOne(productid);
 		return dto;
 	}
 
@@ -63,30 +63,35 @@ public class ProductDao {
 	}
 	
 	// 상품이미지 삭제
-	public boolean pimagedelete(int productId) {
+	public boolean pimagedelete(int productid) {
 		boolean b = false;
-		int re = mappingInterface.pimagedelete(productId);
+		int re = mappingInterface.pimagedelete(productid);
 		if (re > 0)
 			b = true;
 		return b;
 	}
 	// 상세이미지 삭제
-	public boolean dimagedelete(int productId) {
+	public boolean dimagedelete(int productid) {
 		boolean b = false;
-		int re = mappingInterface.dimagedelete(productId);
+		int re = mappingInterface.dimagedelete(productid);
 		if (re > 0)
 			b = true;
 		return b;
 	}
 	// 상품 삭제
-	public boolean delete(int productId) {
+	public boolean delete(int productid) {
 		boolean b = false;
-		int re = mappingInterface.deleteProduct(productId);
+		int re = mappingInterface.deleteProduct(productid);
 		if (re > 0)
 			b = true;
 		return b;
 	}
-	
-	
-
+	// 특정 상품에 관한 리뷰 전체 삭제
+	public boolean deletereviewfromproduct(int productid) {
+		boolean b = false;
+		int re = mappingInterface.deletereviewfromproduct(productid);
+		if (re > 0)
+			b = true;
+		return b;
+	}
 }

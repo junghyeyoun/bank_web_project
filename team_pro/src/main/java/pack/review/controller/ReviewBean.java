@@ -8,14 +8,14 @@ import lombok.Data;
 
 @Data
 public class ReviewBean {
-	private String rating, comment, reviewDate, rimage,  model, brand;
-	private int productId , reviewId;
+	private String rating, comment, reviewdate, rimage,  model, brand;
+	private int productid , reviewid;
 	private MultipartFile rimagePath;
-	public void setReviewDate() {
+	public void setReviewdate() {
 		LocalDate localDate = LocalDate.now();
 		int year = localDate.getYear();
 		int month = localDate.getMonthValue();
 		int day = localDate.getDayOfMonth();
-		this.reviewDate = year + "-" + month + "-" + day;
+		this.reviewdate = year + "-" + month + "-" + day;
 	}
 }

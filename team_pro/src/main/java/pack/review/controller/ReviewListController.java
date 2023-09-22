@@ -67,8 +67,8 @@ public class ReviewListController {
 	
 	// 선택한 상품 자세히 보기
 	@GetMapping("showreview")
-	public String showreview(@RequestParam("reviewId") int reviewId, @RequestParam("page") int page, Model model) {
-		model.addAttribute("data", reviewDao.detail(reviewId));
+	public String showreview(@RequestParam("reviewid") int reviewid, @RequestParam("page") int page, Model model) {
+		model.addAttribute("data", reviewDao.detail(reviewid));
 		model.addAttribute("page", page);
 		
 		return "reviewdetail";

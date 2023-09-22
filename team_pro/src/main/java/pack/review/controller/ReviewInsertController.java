@@ -24,14 +24,14 @@ public class ReviewInsertController {
 	private ReviewDao reviewDao;
 
 	@GetMapping("reviewinsert")
-	public String insert(@RequestParam("productId") int productId, Model model) {
-		model.addAttribute("productId", productId);
+	public String insert(@RequestParam("productid") int productid, Model model) {
+		model.addAttribute("productid", productid);
 		return "reviewinsert";
 	}
 
 	@PostMapping("reviewinsert")
-	public String insertProcess (@RequestParam("productId") int productId, ReviewBean bean, BindingResult result, Model model) throws Exception {
-		bean.setReviewDate();
+	public String insertProcess (@RequestParam("productid") int productid, ReviewBean bean, BindingResult result, Model model) throws Exception {
+		bean.setReviewdate();
 	    InputStream inputStream = null;
 	    OutputStream outputStream = null;
 	    
@@ -57,7 +57,7 @@ public class ReviewInsertController {
 	        while ((read = inputStream.read(bytes)) != -1) {
 	            outputStream.write(bytes, 0, read);
 	        }
-	        bean.setProductId(productId);
+	        bean.setProductid(productid);
 	        bean.setRimage(filename);
 	    } catch (Exception e) {
 	        System.out.println("file submit err : " + e);

@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pack.product.model.ProductDao;
+import pack.review.model.ReviewDao;
 
 @Controller
 public class ProductDeleteController {
 	@Autowired
 	private ProductDao productDao;
 
-	@PostMapping("productdelete")
-	public String delete(RedirectAttributes rdat, @RequestParam("productId") int productId,
-			@RequestParam("page") String page) {
-		productDao.delete(productId);
-		// Redirect로 페이지 이동 시 전송값을 숨겨서 보내는 역할을 하는 클래스 : RedirectAttributes
-		rdat.addFlashAttribute("msg", "삭제");
-		return "redirect:productlist?page=" + page;
+	@PostMapping("/productdelete")
+	public String delete(@RequestParam("productId") int productid) {
+		// product를 참고하는 다른 테이블있다면 거기서도 특정 productId의 데이터들을 삭제한 뒤 진행해야함
+		productDao.deletereviewfromproduct(productid); // reviews가 products의 외래키를 참조하기 때문에 특정 productId에 해당하는 reviews을 먼저 지우고 products을 지워야함
+		productDao.delete(productid);
+		return "redirect:/productlist";
 	}
 
 }

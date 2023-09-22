@@ -25,10 +25,10 @@
 <h3>리뷰 상세보기</h3>
 <table>
 	<tr>
-		<td>리뷰 아이디 : [[${data.reviewId}]]</td>
+		<td>리뷰 아이디 : [[${data.reviewid}]]</td>
 		<!-- 고객 아이디 추가 하기 -->
-		<td>상품 아이디 : [[${data.productId}]]</td>
-		<td>등록일 : [[${data.reviewDate}]]</td>
+		<td>상품 아이디 : [[${data.productid}]]</td>
+		<td>등록일 : [[${data.reviewdate}]]</td>
 	</tr>
 	<tr>
 		<td>별점</td>
@@ -41,10 +41,10 @@
 		<td> <img th:src="@{upload/}+${data.rimage}"/> </td>
 	</tr>
 	<tr>
-		<td><a th:href="@{/reviewupdate(reviewId=${data.reviewId},page=${page},rimage=${data.rimage})}">리뷰 수정</a> &nbsp;&nbsp;
-		<a th:href="@{/reviewdelete(reviewId=${data.reviewId},page=${page})}">리뷰 삭제</a></td>
+		<td><a th:href="@{/reviewupdate(reviewid=${data.reviewid},page=${page},rimage=${data.rimage})}">리뷰 수정</a> &nbsp;&nbsp;
+		<a th:href="@{/reviewdelete(reviewid=${data.reviewid},page=${page})}">리뷰 삭제</a></td>
 	</tr>
-	<tr><td><a th:href="@{/rimagedelete(reviewId=${data.reviewId})}">사진삭제</a></td></tr> <!--작성자만 삭제할 수 있도록 하는 기능 추가 필요 -->
+	<tr><td><a th:href="@{/rimagedelete(reviewid=${data.reviewid})}">사진삭제</a></td></tr> <!--작성자만 삭제할 수 있도록 하는 기능 추가 필요 -->
 </table>
 
 </body>

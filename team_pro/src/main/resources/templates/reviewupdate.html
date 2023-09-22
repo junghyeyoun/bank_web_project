@@ -19,7 +19,7 @@ function chkUpData(){
 <body>
 <h3>리뷰 수정</h3>
 <form action="reviewupdate" method="post" id="myform" name="upFrm" th:object="${data}" enctype="multipart/form-data">
-	 <input type="hidden" th:field="*{reviewId}" />
+	 <input type="hidden" th:field="*{reviewid}" />
 	 <input type="hidden" th:field="*{rimage}" />
 	 <input type="hidden" name="page" th:value="${page}">
 	<table border="1" style="width: 80%">

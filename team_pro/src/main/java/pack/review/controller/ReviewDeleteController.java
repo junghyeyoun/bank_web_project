@@ -19,14 +19,14 @@ public class ReviewDeleteController {
 	    private ReviewDao reviewDao;
 
 	    @GetMapping("/reviewdelete")
-	    public String delete(@RequestParam("reviewId") int reviewId, @RequestParam("page") String page, RedirectAttributes redirectAttributes) {
+	    public String delete(@RequestParam("reviewid") int reviewid, @RequestParam("page") String page, RedirectAttributes redirectAttributes) {
 	        try {
 	            if (!confirmDeletion()) {
 	                // 사용자가 삭제를 취소한 경우
 	                return "redirect:/productlist?page=" + page;
 	            }
 
-	            boolean result = reviewDao.delete(reviewId);
+	            boolean result = reviewDao.delete(reviewid);
 	            if (result) {
 	                return "redirect:/productlist?page=" + page;
 	            } else {

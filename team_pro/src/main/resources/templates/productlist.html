@@ -21,7 +21,7 @@
             <td th:text="${data.price}"></td>
             <td> <img th:src="@{upload/}+${data.pimage}" /> </td>
             <td>
-                <a th:href="@{/showproduct(productId=${data.productId},page=${page})}" th:text="상세보기"></a>
+                <a th:href="@{/showproduct(productid=${data.productid},page=${page})}" th:text="상세보기"></a>
             </td>
         </tr>
         <!-- paging -->

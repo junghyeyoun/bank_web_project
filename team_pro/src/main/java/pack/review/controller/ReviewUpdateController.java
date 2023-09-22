@@ -24,9 +24,9 @@ public class ReviewUpdateController {
 	private ReviewDao reviewDao;
 	
 	@GetMapping("reviewupdate")
-	public String edit(@RequestParam("reviewId") int reviewId, @RequestParam("page")String page, @RequestParam("rimage") String rimage, Model model) {
+	public String edit(@RequestParam("reviewid") int reviewid, @RequestParam("page")String page, @RequestParam("rimage") String rimage, Model model) {
 		// 수정 대상 자료 읽기
-		ReviewDto dto = reviewDao.detail(reviewId);
+		ReviewDto dto = reviewDao.detail(reviewid);
 		
 		model.addAttribute("data", dto);
 		model.addAttribute("page", page);
@@ -36,9 +36,9 @@ public class ReviewUpdateController {
 	}
 	// 사진을 입력하지 않으면 원래 사진 그대로 남아있게 함
 	@PostMapping("reviewupdate")
-	public String editProcess(@RequestParam("reviewId") int reviewId, @RequestParam("page")String page, 
+	public String editProcess(@RequestParam("reviewid") int reviewid, @RequestParam("page")String page, 
 			@RequestParam("rimage") String rimage, ReviewBean bean,BindingResult result,ReviewDto dto, Model model) {
-			bean.setReviewDate();
+			bean.setReviewdate();
 			
 			InputStream inputStream = null;
 		    OutputStream outputStream = null;
@@ -72,7 +72,7 @@ public class ReviewUpdateController {
 		        while ((read = inputStream.read(bytes)) != -1) {
 		            outputStream.write(bytes, 0, read);
 		        }
-		        bean.setReviewId(reviewId);
+		        bean.setReviewid(reviewid);
 		        bean.setRimage(filename);
 		    } catch (Exception e) {
 		        System.out.println("file submit err : " + e);
@@ -95,8 +95,8 @@ public class ReviewUpdateController {
 	
 	// 사진 삭제 (따로)
 	@GetMapping("rimagedelete")
-	public String rimagedelete(@RequestParam("reviewId") int reviewId, Model model) {
-		reviewDao.rimagedelete(reviewId);
+	public String rimagedelete(@RequestParam("reviewid") int reviewid, Model model) {
+		reviewDao.rimagedelete(reviewid);
 		
 		return "redirect:reviewlist";
 	}

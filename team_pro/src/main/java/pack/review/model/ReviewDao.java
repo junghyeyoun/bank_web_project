@@ -34,8 +34,8 @@ public class ReviewDao {
 	}
 	
 	// 해당 리뷰 상세 보기
-	public ReviewDto detail(int reviewId) {
-		ReviewDto dto = reviewMappingInterface.selectOne(reviewId);
+	public ReviewDto detail(int reviewid) {
+		ReviewDto dto = reviewMappingInterface.selectOne(reviewid);
 		return dto;
 	}
 
@@ -53,20 +53,22 @@ public class ReviewDao {
 	}
 	
 	// 리뷰 삭제
-	public boolean delete(int reviewId) {
+	public boolean delete(int reviewid) {
 		boolean b = false;
-		int re = reviewMappingInterface.deleteReview(reviewId);
+		int re = reviewMappingInterface.deleteReview(reviewid);
 		if (re > 0)
 			b = true;
 		return b;
 	}
 	
 	// rimage 삭제
-	public boolean rimagedelete(int reviewId) {
+	public boolean rimagedelete(int reviewid) {
 		boolean b = false;
-		int re = reviewMappingInterface.rimagedelete(reviewId);
+		int re = reviewMappingInterface.rimagedelete(reviewid);
 		if (re > 0)
 			b = true;
 		return b;
 	}
+	
+
 }

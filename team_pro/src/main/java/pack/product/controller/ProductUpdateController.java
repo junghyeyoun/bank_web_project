@@ -24,10 +24,10 @@ public class ProductUpdateController {
 	private ProductDao productDao;
 
 	@GetMapping("productupdate")
-	public String edit(@RequestParam("productId") int productId, @RequestParam("page") String page,
+	public String edit(@RequestParam("productid") int productid, @RequestParam("page") String page,
 			@RequestParam("pimage") String pimage, @RequestParam("dimage") String dimage, Model model) {
 		// 수정 대상 자료 읽기
-		ProductDto dto = productDao.detail(productId);
+		ProductDto dto = productDao.detail(productid);
 
 		model.addAttribute("data", dto);
 		model.addAttribute("page", page);
@@ -38,7 +38,7 @@ public class ProductUpdateController {
 	}
 
 	@PostMapping("productupdate")
-	public String editProcess(@RequestParam("productId") int productId, @RequestParam("page") String page,
+	public String editProcess(@RequestParam("productid") int productid, @RequestParam("page") String page,
 			@RequestParam("pimage") String pimage, @RequestParam("dimage") String dimage, ProductBean bean,
 			BindingResult result, Model model) {
 
@@ -127,15 +127,15 @@ public class ProductUpdateController {
 	
 	// 상품이미지 삭제(따로)
 	@GetMapping("pimagedelete")
-	public String pimagedelete(@RequestParam("productId") int productId, Model model) {
-		productDao.pimagedelete(productId);
+	public String pimagedelete(@RequestParam("productid") int productid, Model model) {
+		productDao.pimagedelete(productid);
 		return "redirect:productlist";
 	}
 	
 	// 상세이미지 삭제(따로)
 	@GetMapping("dimagedelete")
-	public String dimagedelete(@RequestParam("productId") int productId, Model model) {
-		productDao.dimagedelete(productId);
+	public String dimagedelete(@RequestParam("productid") int productid, Model model) {
+		productDao.dimagedelete(productid);
 		return "redirect:productlist";
 	}
 	

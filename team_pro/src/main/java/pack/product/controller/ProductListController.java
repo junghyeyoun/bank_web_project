@@ -67,8 +67,8 @@ public class ProductListController {
 
 	// 선택한 상품 자세히 보기
 	@GetMapping("showproduct")
-	public String showproduct(@RequestParam("productId") int productId, @RequestParam("page") String page, Model model) {
-		model.addAttribute("data", productDao.detail(productId));
+	public String showproduct(@RequestParam("productid") int productid, @RequestParam("page") String page, Model model) {
+		model.addAttribute("data", productDao.detail(productid));
 		model.addAttribute("page", page);
 		
 		return "productdetail";
