@@ -74,6 +74,7 @@ public class ProductListController {
 		return "productdetail";
 	}
 	
+	// 상품 검색하기
 	@GetMapping("productsearch")
 	public String searchProcess(ProductBean bean, Model model) {
 	    System.out.println(bean.getSearchName() + " " + bean.getSearchValue()); // 검색 파라미터 확인용

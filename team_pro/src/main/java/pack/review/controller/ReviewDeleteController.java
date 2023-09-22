@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,35 +18,11 @@ public class ReviewDeleteController {
 
 	    @Autowired
 	    private ReviewDao reviewDao;
-
-	    @GetMapping("/reviewdelete")
-	    public String delete(@RequestParam("reviewid") int reviewid, @RequestParam("page") String page, RedirectAttributes redirectAttributes) {
-	        try {
-	            if (!confirmDeletion()) {
-	                // 사용자가 삭제를 취소한 경우
-	                return "redirect:/productlist?page=" + page;
-	            }
-
-	            boolean result = reviewDao.delete(reviewid);
-	            if (result) {
-	                return "redirect:/productlist?page=" + page;
-	            } else {
-	                redirectAttributes.addFlashAttribute("errorMessage", "상품 삭제에 실패했습니다.");
-	                return "redirect:/error";
-	            }
-	        } catch (Exception e) {
-	            logger.error("상품 삭제 중 오류 발생: " + e.getMessage());
-	            redirectAttributes.addFlashAttribute("errorMessage", "상품 삭제 중 오류 발생했습니다.");
-	            return "redirect:/error";
-	        }
-	    }
-
-	    private boolean confirmDeletion() {
-	        // 여기에서 사용자에게 정말 삭제할 것인지 물어보는 로직을 추가
-	        // 사용자가 확인한 경우 true를 반환하고, 취소한 경우 false를 반환
-	        // 예를 들어, JavaScript를 사용하여 브라우저에서 확인 대화상자를 표시할 수 있습니다.
-	        
-	        // 여기서는 간단하게 true로 가정
-	        return true;
-	    }
+	    
+	    @PostMapping("/reviewdelete")
+	    public String delete(@RequestParam("reviewid") int reviewid) {
+			// review를 참고하는 다른 테이블있다면 거기서도 특정 reveiwid의 데이터들을 삭제한 뒤 진행해야함
+	    	reviewDao.delete(reviewid);
+			return "redirect:/reviewlist";
+		}
 }

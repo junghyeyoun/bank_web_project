@@ -6,7 +6,8 @@ import lombok.Data;
 
 @Data
 public class ReviewDto {
-	private String rating, comment, reviewdate, rimage, model, brand;
+	private String nickname, title, rating, comment, reviewdate, rimage, model, brand;
 	private MultipartFile rimagePath;
-	private int productid , reviewid;
+	private int rproductid , reviewid;
+	private int gnum, onum; // 답글을 위한 칼럼
 }

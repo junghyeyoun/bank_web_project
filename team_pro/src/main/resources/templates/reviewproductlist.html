@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>상품별 리뷰 목록</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("td.rating").each(function () {
+				var rating = parseInt($(this).text());
+				var stars = "";
+				for (var i = 1; i <= 5; i++) {
+					if (i <= rating) {
+						stars += "&#9733; ";
+					} else {
+						stars += "&#9734; ";
+					}
+				}
+				$(this).html(stars);
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<table border="1">
+		<tr>
+			<th>상품id</th>
+			<th>모델</th>
+			<th>브랜드</th>
+			<th>별점</th>
+			<th>등록일</th>
+			<th>상세보기</th>
+		</tr>
+		<tr th:if="${list.size() > 0}" th:each="data : ${list}">
+			<td th:text="${data.rproductid}"></td>
+			<td th:text="${data.model}"></td>
+			<td th:text="${data.brand}"></td>
+			<td class="rating" th:text="${data.rating}"></td>
+			<td th:text="${data.reviewdate}"></td>
+			<td>
+				<a th:href="@{/showreview(reviewid=${data.reviewid},page=${page})}" th:text="상세보기"></a>
+			</td>
+		</tr>
+		<!-- paging -->
+		<tr style="text-align: center;">
+			<td colspan="5">
+				<span th:each="num : ${#numbers.sequence(1, pagesu)}">
+					<span th:if="${num == page}">
+						<b th:text="${num}">num 표시(현재 페이지는 링크를 걸지 않음)</b>
+					</span>
+					<span th:if="${num != page}">
+						<a th:href="@{reviewlist(page=${num})}" th:text="${num}">num 표시</a>
+					</span>
+				</span>
+			</td>
+	</table>
+</body>
+
+</html>

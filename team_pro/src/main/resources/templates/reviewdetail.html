@@ -27,8 +27,12 @@
 	<tr>
 		<td>리뷰 아이디 : [[${data.reviewid}]]</td>
 		<!-- 고객 아이디 추가 하기 -->
-		<td>상품 아이디 : [[${data.productid}]]</td>
+		<td>상품 아이디 : [[${data.rproductid}]]</td>
 		<td>등록일 : [[${data.reviewdate}]]</td>
+	</tr>
+	<tr>
+		<td>닉네임 : [[${data.nickname}]]</td>
+		<td>제목 : [[${data.title}]]</td>
 	</tr>
 	<tr>
 		<td>별점</td>
@@ -41,11 +45,35 @@
 		<td> <img th:src="@{upload/}+${data.rimage}"/> </td>
 	</tr>
 	<tr>
-		<td><a th:href="@{/reviewupdate(reviewid=${data.reviewid},page=${page},rimage=${data.rimage})}">리뷰 수정</a> &nbsp;&nbsp;
-		<a th:href="@{/reviewdelete(reviewid=${data.reviewid},page=${page})}">리뷰 삭제</a></td>
+		<td><a th:href="@{/reviewupdate(reviewid=${data.reviewid},page=${page},rimage=${data.rimage})}">리뷰 수정</a> &nbsp;&nbsp;</td>
+		<td>
+			<input type="button" value="리뷰삭제" id="btnDel" />
+		</td>
 	</tr>
 	<tr><td><a th:href="@{/rimagedelete(reviewid=${data.reviewid})}">사진삭제</a></td></tr> <!--작성자만 삭제할 수 있도록 하는 기능 추가 필요 -->
+	
 </table>
-
+	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"  charset="UTF-8"></script>
+      <script th:inline="javascript">
+       /*<![CDATA[*/
+ 		$(document).ready(function() {
+			 $("#btnDel").click(function() {
+				 if(confirm("정말 삭제하시겠습니까? \n 삭제후 되돌릴 수 없습니다.")){
+				 $.ajax({
+					 type:"POST",
+					 url:"/reviewdelete", // ReviewDeleteController로 연결
+					 data : {reviewid:/*[[${data.reviewid}]]*/},  // 오류로 뜨지만 기능은 잘 작동함 왜그런지는 나도모름
+					 success : function(response) {
+						 alert("삭제가 완료되었습니다."); // 리뷰목록으로 돌아가면 좋겠다					 
+					 },
+					 error:function() {
+						 alert("오류 발생");
+					 }
+				 });
+				 }
+			 });
+		 });
+        /*]]>*/
+    </script>
 </body>
 </html>

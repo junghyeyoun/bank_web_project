@@ -13,25 +13,33 @@ import pack.review.controller.ReviewBean;
 @Mapper
 public interface ReviewMappingInterface {
 	// 리뷰 등록
-	@Insert("INSERT INTO reviews (productid, rating, comment, reviewdate, rimage)\r\n"
-			+ "VALUES (#{productid}, #{rating}, #{comment}, #{reviewdate} ,#{rimage})")
+	@Insert("INSERT INTO reviews (rproductid, nickname, title,rating, comment, reviewdate, rimage)\r\n"
+			+ "VALUES (#{rproductid}, #{nickname}, #{title},#{rating}, #{comment}, #{reviewdate} ,#{rimage})")
 	int insertReview(ReviewBean bean);
 
-	// 리뷰 목록 보기
+	// 리뷰 목록 보기 - 사용자별추가하는게 좋을 것 같음
 	// products table의 model,brand를 가져오기 위해 join 사용
-	@Select("select a.productid, reviewid, model, brand, rating, comment, reviewdate from reviews a left outer join products b on a.productid = b.productid  order by reviewid desc")
+	@Select("select rproductid, reviewid, nickname, title ,model, brand, rating, comment, reviewdate from reviews left outer join products on rproductid = productid order by reviewid desc")
 	List<ReviewDto> selectAll();
 
 	// 해당 리뷰 자세히 보기
-	@Select("select a.productid, reviewid, model, brand, rating, comment, reviewdate, rimage from reviews a left outer join products b on a.productid = b.productid where reviewid = #{reviewid}")
-	ReviewDto selectOne(int reviewId);
-
+	@Select("select rproductid, reviewid, nickname, title, model, brand, rating, comment, reviewdate, rimage from reviews left outer join products on rproductid = productid where reviewid = #{reviewid}")
+	ReviewDto selectOne(int reviewid);
+	
+	// 상품별 리뷰 보기
+	@Select("select rproductid, reviewid, nickname, title, model, brand, rating, comment, reviewdate, rimage from reviews left outer join products on rproductid = productid where rproductid = #{rproductid} order by reviewid desc")
+	List<ReviewDto> selectPart(int productid); 
+	
 	// 총 리뷰 수 구하기 (페이징 처리를 위해)
 	@Select("select count(*) from reviews")
 	int totalCnt();
+	
+	// 댓글 번호 갱신을 위해 현재에서 현재 레코드에서 가장 큰 번호 얻기
+	@Select("select max(reviewid) from reviews")
+	int currentNum(); 
 
 	// 리뷰 수정
-	@Update("update reviews set rating=#{rating}, comment=#{comment}, reviewdate=#{reviewdate}, rimage=#{rimage} where reviewId=#{reviewid}")
+	@Update("update reviews set nickname=#{nickname}, title=#{title}, rating=#{rating}, comment=#{comment}, reviewdate=#{reviewdate}, rimage=#{rimage} where reviewId=#{reviewid}")
 	int updateReview(ReviewBean bean);
 
 	// 리뷰 삭제

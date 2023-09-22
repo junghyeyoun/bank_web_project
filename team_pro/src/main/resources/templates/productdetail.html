@@ -4,71 +4,90 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("td.rating").each(function () {
+				var rating = parseInt($(this).text());
+				var stars = "";
+				for (var i = 1; i <= 5; i++) {
+					if (i <= rating) {
+						stars += "&#9733; ";
+					} else {
+						stars += "&#9734; ";
+					}
+				}
+				$(this).html(stars);
+			});
+		});
+	</script>
 </head>
 
 <body>
-	<form name="frm" id="frm" action="">
-		<h3>제품 상세보기</h3>
-		<table>
-			<tr>
-				<td>product id : [[${data.productid}]]</td>
-				<td>category id : [[${data.category}]]</td>
-				<td>브랜드 : [[${data.brand}]]</td>
-				<td>모델 : [[${data.model}]]</td>
-				<td>가격 : [[${data.price}]] 원</td>
-				<td>재고량 : [[${data.stockquantity}]] 개</td>
-				<td> <img th:src="@{upload/}+${data.pimage}" /> </td>
-			</tr>
-			<tr>
-				<td><button>카트에 담기</button></td>
-				<td><button>주문하기</button></td>
-			<tr>
-				<a th:href="@{/reviewinsert(productid=${data.productid})}">리뷰쓰기</a>
-			</tr>
-			</tr>
-			<!-- 상품삭제, 상품수저으 상품이미지삭제, 상세이미지 삭제 (판매자에게만 보여주도록 함) -->
-			<tr>
-				<td><a
-						th:href="@{/productupdate(productid=${data.productid},page=${page},pimage=${data.pimage},dimage=${data.dimage})}">상품
-						수정</a></td>
-				<td>
-					<input type="button" value="상품삭제" id="btnDel" />
-				</td>
-			</tr>
+	<div>
+	<table>
+		<tr>
+			<td>category id : [[${data.category}]]</td>
+			<td>브랜드 : [[${data.brand}]]</td>
+			<td>모델 : [[${data.model}]]</td>
+			<td>가격 : [[${data.price}]] 원</td>
+			<td>재고량 : [[${data.stockquantity}]] 개</td>
+			<td> <img th:src="@{upload/}+${data.pimage}" /> </td>
+		</tr>
+		<tr>
+			<td><button>카트에 담기</button></td>
+			<td><button>주문하기</button></td>
+		<tr>
+			<td><a th:href="@{/reviewinsert(rproductid=${data.productid})}">리뷰쓰기</a></td>
+			<td><a th:href="@{/selectpart(rproductid=${data.productid}, page=${page})}">상품별 리뷰 보기</a> </td>
+		</tr>
+		</tr>
+		<!-- 상품삭제, 상품수정 상품이미지삭제, 상세이미지 삭제 (판매자에게만 보여주도록 함) -->
+		<tr>
+			<td><a
+					th:href="@{/productupdate(productid=${data.productid},page=${page},pimage=${data.pimage},dimage=${data.dimage})}">상품
+					수정</a></td>
+			<td>
+				<input type="button" value="상품삭제" id="btnDel" />
+			</td>
+		</tr>
 
-			<tr>
-				<td><a th:href="@{/pimagedelete(productid=${data.productid})}">상품이미지 삭제</a></td>
-				<td><a th:href="@{/dimagedelete(productid=${data.productid})}">상세이미지 삭제</a></td>
-			</tr>
-		</table>
-	
-		<br>
+		<tr>
+			<td><a th:href="@{/pimagedelete(productid=${data.productid})}">상품이미지 삭제</a></td>
+			<td><a th:href="@{/dimagedelete(productid=${data.productid})}">상세이미지 삭제</a></td>
+		</tr>
+	</table>
+</div>
+	<br>
+	<div id="detailimage">
+		<h2>상품상세</h2>
 		<img th:src="@{upload/}+${data.dimage}" />
-		<input type="hidden" name="productid" value="${data.productid}" />
-		<input type="hidden" name="page" value="${page}" />
-	</form>
-	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"  charset="UTF-8"></script>
-      <script th:inline="javascript">
-       /*<![CDATA[*/
- 		$(document).ready(function() {
-			 $("#btnDel").click(function() {
-				 if(confirm("정말 삭제하시겠습니까? \n 삭제후 되돌릴 수 없습니다.")){
-				 $.ajax({
-					 type:"POST",
-					 url:"/productdelete", // ProductDeleteController로 연결
-					 data : {productId:/*[[${data.productid}]]*/}, 
-					 success : function(response) {
-						 alert("삭제가 완료되었습니다.");
-					 },
-					 error:function() {
-						 alert("오류 발생");
-					 }
-				 });
-				 }
-			 });
-		 });
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="UTF-8"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function () {
+			$("#btnDel").click(function () {
+				if (confirm("정말 삭제하시겠습니까? \n 삭제후 되돌릴 수 없습니다.")) {
+					$.ajax({
+						type: "POST",
+						url: "/productdelete", // ProductDeleteController로 연결
+						data: {productid:/*[[${data.productid}]]*/},  // 오류로 뜨지만 기능은 잘 작동함 왜그런지는 나도모름
+						success: function (response) {
+							alert("삭제가 완료되었습니다."); // 상품목록으로 돌아가면 좋겠다					 
+						},
+						error: function () {
+							alert("오류 발생");
+						}
+					});
+				}
+			});
+		});
         /*]]>*/
-    </script>
+	</script>
+
 </body>
 
 </html>

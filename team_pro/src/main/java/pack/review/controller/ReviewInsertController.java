@@ -24,13 +24,13 @@ public class ReviewInsertController {
 	private ReviewDao reviewDao;
 
 	@GetMapping("reviewinsert")
-	public String insert(@RequestParam("productid") int productid, Model model) {
-		model.addAttribute("productid", productid);
+	public String insert(@RequestParam("rproductid") int rproductid, Model model) {
+		model.addAttribute("rproductid", rproductid);
 		return "reviewinsert";
 	}
 
 	@PostMapping("reviewinsert")
-	public String insertProcess (@RequestParam("productid") int productid, ReviewBean bean, BindingResult result, Model model) throws Exception {
+	public String insertProcess (@RequestParam("rproductid") int rproductid, ReviewBean bean, BindingResult result, Model model) throws Exception {
 		bean.setReviewdate();
 	    InputStream inputStream = null;
 	    OutputStream outputStream = null;
@@ -57,7 +57,7 @@ public class ReviewInsertController {
 	        while ((read = inputStream.read(bytes)) != -1) {
 	            outputStream.write(bytes, 0, read);
 	        }
-	        bean.setProductid(productid);
+	        bean.setRproductid(rproductid);
 	        bean.setRimage(filename);
 	    } catch (Exception e) {
 	        System.out.println("file submit err : " + e);
@@ -70,7 +70,9 @@ public class ReviewInsertController {
 	        }
 	    }
 	   
-        
+	    int newNum = reviewDao.currentNum() + 1;  // 새글 번호
+		bean.setReviewid(newNum);
+		bean.setGnum(newNum);
        
         boolean b =  reviewDao.reviewinsert(bean);
         if(b) {
