@@ -47,7 +47,7 @@ public class ReviewInsertController {
 
 	    try {
 	        inputStream = file.getInputStream();
-	        File newFile = new File("C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename);
+	        File newFile = new File("C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename);
 	        if (!newFile.exists()) {
 	            newFile.createNewFile();
 	        }

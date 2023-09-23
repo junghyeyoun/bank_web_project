@@ -60,7 +60,7 @@ public class ProductUpdateController {
 			try {
 				inputStream1 = file1.getInputStream();
 				File newFile1 = new File(
-						"C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename1); // 절대경로로
+						"C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename1); // 절대경로로
 																															// 찍기
 				if (!newFile1.exists()) {
 					newFile1.createNewFile();
@@ -93,7 +93,7 @@ public class ProductUpdateController {
 			try {
 				inputStream2 = file2.getInputStream();
 				File newFile2 = new File(
-						"C:\\work\\sprsou\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename2);
+						"C:\\Users\\윤정혜\\git\\team_project\\team_pro\\src\\main\\resources\\static\\upload\\" + filename2);
 				if (!newFile2.exists()) {
 					newFile2.createNewFile();
 				}
