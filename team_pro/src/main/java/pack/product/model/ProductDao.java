@@ -35,6 +35,13 @@ public class ProductDao {
 		ProductDto dto = mappingInterface.selectOne(productid);
 		return dto;
 	}
+	
+	// 카테고리별 상품 보기
+	public List<ProductDto> selectCatogory(String category) {
+		List<ProductDto> list = mappingInterface.selectCategory(category);
+		logger.info("읽은 카테고리 별 상품 수 : " + list.size());
+		return list;
+	}
 
 	public int totalCnt() {
 		return mappingInterface.totalCnt();
@@ -48,9 +55,11 @@ public class ProductDao {
 	}
 
 	// 상품 등록
-	public void insert(ProductBean bean) {
-	   
-	    mappingInterface.insertProduct(bean);
+	public boolean insert(ProductBean bean) {
+		boolean b = false;
+	    int re = mappingInterface.insertProduct(bean);
+	    if(re>0) b = true;
+		return b;
 	}
 
 	// 상품 수정

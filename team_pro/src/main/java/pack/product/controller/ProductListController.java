@@ -86,5 +86,29 @@ public class ProductListController {
 	    model.addAttribute("page", "1");
 	    return "productlist";
 	}
+	
+	// 카테고리별 상품 보기
+	@GetMapping("productcategorylist")
+	public String showProductCategoryList(@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam("category") String category,Model model) {
+	    // paging 처리
+	    int spage = 0;
+	    try {
+	        spage = page;
+	    } catch (Exception e) {
+	        spage = 1;
+	    }
+	    if (page <= 0)
+	        spage = 1;
+
+	    ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.selectCatogory(category);
+	    ArrayList<ProductDto> result = getListdata(list, spage);
+
+	    model.addAttribute("list", result); 
+	    model.addAttribute("pagesu", getPageSu());
+	    model.addAttribute("page", spage);
+	    return "productcategorylist";
+	}
+	
 
 }

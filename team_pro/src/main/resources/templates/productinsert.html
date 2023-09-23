@@ -10,40 +10,76 @@
 			btnIns.addEventListener("click", checkData);
 		}
 
-		function checkData() {
+function checkData(event) {
+	 if (frm.brand.value === "") {
+        alert("브랜드를 입력하시오");
+        frm.brand.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    
+    if (frm.model.value === "") {
+        alert("모델을 입력하시오");
+        frm.model.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    
+    let price = frm.price.value;
+    if (frm.price.value === "") {
+        alert("가격을 입력하시오");
+        frm.price.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    // 숫자가 아닌 경우 경고 표시
+    if (!isNumeric(price)) {
+        alert("가격은 숫자만 입력 가능합니다.");
+        frm.price.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    
+    let stockquantity = frm.stockquantity.value;
+    if (frm.stockquantity.value === "") {
+        alert("재고량을 입력하시오");
+        frm.stockquantity.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    // 숫자가 아닌 경우 경고 표시
+    if (!isNumeric(stockquantity)) {
+        alert("재고량은 숫자만 입력 가능합니다.");
+        frm.stockquantity.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    
+    if (frm.pimagePath.value === "") {
+        alert("상품 이미지를 입력하시오");
+        frm.pimagePath.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    
+    if (frm.dimagePath.value === "") {
+        alert("상품 상세 이미지를 입력하시오");
+        frm.dimagePath.focus();
+        event.preventDefault(); // 폼 제출 방지
+        return;
+    }
+    
+    // 숫자 검증 함수
+function isNumeric(price) {
+    return !isNaN(parseFloat(price)) && isFinite(price);
+}
+	// 숫자 검증 함수
+function isNumeric(stockquantity) {
+    return !isNaN(parseFloat(stockquantity)) && isFinite(stockquantity);
+}
 
-			if (frm.model.value === "") {
-				alert("모델을 입력하시오");
-				frm.model.focus();
-				return;
-			}
+}
 
-			if (frm.price.value === "") {
-				alert("가격을 입력하시오");
-				frm.price.focus();
-				return;
-			}
-
-			if (frm.stockQuantity.value === "") {
-				alert("재고량을 입력하시오");
-				frm.stockQuantity.focus();
-				return;
-			}
-			if (frm.pimagePath.value === "") {
-				alert("상품 이미지를 입력하시오");
-				frm.pimagePath.focus();
-				return;
-			}
-
-			if (frm.dimagePath.value === "") {
-				alert("상품 상세 이미지를 입력하시오");
-				frm.dimagePath.focus();
-				return;
-			}
-
-
-			frm.submit();
-		}
 	</script>
 </head>
 
@@ -53,11 +89,12 @@
 		<table style="width: 80%">
 			<tr>
 				<td>카테고리</td>
-				<td><select>
-    <option value="americano">아메리카노</option>
-    <option value="caffe latte">카페라테</option>
-    <option value="cafe au lait" selected>카페오레</option>
-    <option value="espresso">에스프레소</option>
+				<td><select name="category">
+    <option value="핸드폰" selected>핸드폰</option>
+    <option value="태블릿">태블릿</option>
+    <option value="헤드셋/이어폰" >헤드셋/이어폰</option>
+    <option value="스마트워치/밴드">스마트워치/밴드</option>
+    <option value="악세사리">악세사리</option>
 </select></td>
 			</tr>
 			<tr>

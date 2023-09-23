@@ -26,6 +26,16 @@
 		<input type="hidden" th:field="*{dimage}" />
 		<table border="1" style="width: 80%">
 			<tr>
+				<td>카테고리</td>
+				<td><select name="category">
+    <option value="핸드폰" selected>핸드폰</option>
+    <option value="태블릿">태블릿</option>
+    <option value="헤드셋/이어폰" >헤드셋/이어폰</option>
+    <option value="스마트워치/밴드">스마트워치/밴드</option>
+    <option value="악세사리">악세사리</option>
+</select></td>
+			</tr>
+			<tr>
 				<td>브랜드</td>
 				<td><input type="text" th:field="*{brand}"></td>
 			</tr>

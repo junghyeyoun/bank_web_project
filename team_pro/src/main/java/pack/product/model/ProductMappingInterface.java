@@ -12,13 +12,17 @@ import pack.product.controller.ProductBean;
 
 @Mapper
 public interface ProductMappingInterface {
-	// 전체 상품 읽기
+	// 전체 상품 읽기 - 판매자가 자신이 등록한 상품 보기 목록으로 바꿔도 좋을듯
 	@Select("SELECT * FROM products ORDER BY productid DESC")
 	List<ProductDto> selectAll();
 
 	// 해당 상품 상세 보기
 	@Select("select * from products where productid=#{productid}")
 	ProductDto selectOne(int product_id);
+	
+	// 카테고리 별 상품 보기
+	@Select("select * from products where category=#{category}")
+	List<ProductDto> selectCategory(String category);
 
 	// 상품 등록
 	@Insert("INSERT INTO products (category, brand, model, price, stockquantity,pimage, dimage)\r\n"
@@ -34,7 +38,7 @@ public interface ProductMappingInterface {
 	List<ProductDto> searchList(ProductBean bean);
 
 	// 상품 수정
-	@Update("update products set brand=#{brand}, model=#{model}, price=#{price}, stockquantity=#{stockquantity}, pimage=#{pimage}, dimage=#{dimage}  where productid=#{productid}")
+	@Update("update products set category=#{category}, brand=#{brand}, model=#{model}, price=#{price}, stockquantity=#{stockquantity}, pimage=#{pimage}, dimage=#{dimage}  where productid=#{productid}")
 	int updateProduct(ProductBean bean);
 
 	// pimage(상품이미지) 삭제
@@ -52,4 +56,5 @@ public interface ProductMappingInterface {
 	// 특정 상품에 관한 리뷰 전체 삭제
 	@Delete("delete from reviews where productid = #{productid}")
 	int deletereviewfromproduct(int productid);
+	
 }

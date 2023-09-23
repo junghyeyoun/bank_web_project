@@ -71,9 +71,7 @@ public class ProductInsertController {
 			while((read = inputStream2.read(bytes))!=-1) {
 				outputStream2.write(bytes,0,read);
 			}
-			bean.setPimage(filename1);
-			bean.setDimage(filename2);
-			productDao.insert(bean);
+			
 		} catch (Exception e) {
 			System.out.println("file submit err : "+e);
 		} finally {
@@ -87,7 +85,14 @@ public class ProductInsertController {
 			}
 		}
 		
-		model.addAttribute("list",bean);
-		return "redirect:/productlist";
+		bean.setPimage(filename1);
+		bean.setDimage(filename2);
+		
+		  boolean b =  productDao.insert(bean);;
+	        if(b) {
+	        	return "redirect:productlist";
+	        } else {
+	        	return "redirect:productinsert";
+	        }
 	}
 }
