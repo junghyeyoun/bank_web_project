@@ -20,6 +20,28 @@
             });
         });
     </script>
+    
+     <script type="text/javascript">
+		window.onload = function () {
+			let btnIns = document.getElementById("btnInsre");
+			btnIns.addEventListener("click", checkData);
+		function checkData() {
+			if (replyform.nickname.value === "") {
+				alert("닉네임을 입력하시오");
+				replyform.nickname.focus();
+				return;
+			}
+
+			if (replyform.comment.value === "") {
+				alert("댓글을 입력하시오");
+				replyform.comment.focus();
+				return;
+			}
+			replyform.submit();
+		}
+}
+	</script>
+   
 </head>
 <body>
 <h3>리뷰 상세보기</h3>
@@ -53,6 +75,28 @@
 	<tr><td><a th:href="@{/rimagedelete(reviewid=${data.reviewid})}">사진삭제</a></td></tr> <!--작성자만 삭제할 수 있도록 하는 기능 추가 필요 -->
 	
 </table>
+<hr>
+<h5>댓글등록</h5>
+<form th:action="@{/reviewreplyinsert}" name="replyform" id="replyform" method="post">
+<input type="hidden" name="reviewno" th:value="${data.reviewid}" />
+<input type="hidden" name="page" th:value="${page}" />
+<input type="text" name="nickname"><br>
+<textarea type="text" name="comment" placeholder="댓글을 남겨주세요"></textarea><br>
+<input type="button" value="등록" id="btnInsre" />
+</form>
+<h5>댓글보기</h5>
+<table th:if="${list.size() > 0}" th:each="reply : ${list}">
+    <tr>
+        <td>닉네임</td>
+        <td th:text="${reply.nickname}"></td>
+    </tr>
+    <tr>
+        <td>내용</td>
+        <td th:text="${reply.comment}" readonly="readonly"></td>
+    </tr>
+</table>
+
+
 	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"  charset="UTF-8"></script>
       <script th:inline="javascript">
        /*<![CDATA[*/
@@ -75,5 +119,9 @@
 		 });
         /*]]>*/
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"  charset="UTF-8"></script>
+      <script th:inline="javascript">
+		  
+	</script>
 </body>
 </html>

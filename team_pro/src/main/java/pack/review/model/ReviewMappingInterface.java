@@ -33,10 +33,6 @@ public interface ReviewMappingInterface {
 	// 총 리뷰 수 구하기 (페이징 처리를 위해)
 	@Select("select count(*) from reviews")
 	int totalCnt();
-	
-	// 댓글 번호 갱신을 위해 현재에서 현재 레코드에서 가장 큰 번호 얻기
-	@Select("select max(reviewid) from reviews")
-	int currentNum(); 
 
 	// 리뷰 수정
 	@Update("update reviews set nickname=#{nickname}, title=#{title}, rating=#{rating}, comment=#{comment}, reviewdate=#{reviewdate}, rimage=#{rimage} where reviewId=#{reviewid}")

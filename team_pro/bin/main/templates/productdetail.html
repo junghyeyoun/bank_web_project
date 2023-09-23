@@ -4,23 +4,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$("td.rating").each(function () {
-				var rating = parseInt($(this).text());
-				var stars = "";
-				for (var i = 1; i <= 5; i++) {
-					if (i <= rating) {
-						stars += "&#9733; ";
-					} else {
-						stars += "&#9734; ";
-					}
-				}
-				$(this).html(stars);
-			});
-		});
-	</script>
 </head>
 
 <body>
@@ -37,6 +20,7 @@
 		<tr>
 			<td><button>카트에 담기</button></td>
 			<td><button>주문하기</button></td>
+			<td><input type="button" value="찜하기" id="btnZZim"/></td>
 		<tr>
 			<td><a th:href="@{/reviewinsert(rproductid=${data.productid})}">리뷰쓰기</a></td>
 			<td><a th:href="@{/selectpart(rproductid=${data.productid}, page=${page})}">상품별 리뷰 보기</a> </td>
@@ -86,6 +70,29 @@
 			});
 		});
         /*]]>*/
+	</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="UTF-8"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function (){
+			$("#btnZZim").click(function () {
+				$.ajax({
+				type: "GET",
+				data: {productid:/*[[${data.productid}]]*/},
+				url: "wishlistinsert",
+				success : function (response) { 
+					alert("찜 성공!");
+                    if (confirm("찜목록으로 이동하시겠습니까?")) {
+                        window.location.href = "wishlist"; 
+                    }
+				},
+				error:function () {
+					alert("이미 찜이 된 상품입니다.");
+				}
+				})
+			})
+		})
+		/*]]>*/
 	</script>
 
 </body>

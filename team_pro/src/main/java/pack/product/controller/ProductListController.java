@@ -107,7 +107,7 @@ public class ProductListController {
 	    model.addAttribute("list", result); 
 	    model.addAttribute("pagesu", getPageSu());
 	    model.addAttribute("page", spage);
-	    return "productcategorylist";
+	    return "productlist";
 	}
 	
 

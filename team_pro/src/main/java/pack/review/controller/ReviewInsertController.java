@@ -69,10 +69,6 @@ public class ReviewInsertController {
 	            // 예외 처리 코드
 	        }
 	    }
-	   
-	    int newNum = reviewDao.currentNum() + 1;  // 새글 번호
-		bean.setReviewid(newNum);
-		bean.setGnum(newNum);
        
         boolean b =  reviewDao.reviewinsert(bean);
         if(b) {

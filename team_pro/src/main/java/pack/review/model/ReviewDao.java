@@ -49,10 +49,6 @@ public class ReviewDao {
 		return reviewMappingInterface.totalCnt();
 	}
 	
-	public int currentNum() {
-		// 추가 시 reviewid 자동증가를 위해 현재 레코드 중 가장 큰 번호 얻기
-		return reviewMappingInterface.currentNum();
-	}
 	// 리뷰 수정
 	public boolean update(ReviewBean bean) {
 		boolean b = false;
