@@ -14,7 +14,7 @@ import pack.reviewreply.controller.ReviewReplyBean;
 public interface ReviewReplyMappingInterface {
 
 	// 댓글 작성
-	@Insert("insert into reviewreply (reviewno, nickname, comment, replydate) values (#{reviewno}, #{nickname}, #{comment}, #{replydate})")
+	@Insert("insert into reviewreply (reviewno, comment, replydate) values (#{reviewno}, #{comment}, #{replydate})")
 	int insertreply(ReviewReplyBean bean);
 	
 	// 댓글 조회
@@ -26,10 +26,14 @@ public interface ReviewReplyMappingInterface {
 	ReviewReplyDto selectOne(int replyid);
 	
 	// 댓글 수정
-	@Update("update reviewreply set nickname=#{nickname}, comment=#{comment} where replyid=#{replyid}")
+	@Update("update reviewreply set comment=#{comment} where replyid=#{replyid}")
 	int updatereply(ReviewReplyBean bean);
 	
 	// 댓글 삭제
 	@Delete("delete from reviewreply where replyid=#{replyid}")
 	int deletereply (int replyid);
+	
+	// 리뷰 전체 삭제를 위해 특정 reviewid의 댓글 삭제해야함
+	@Delete("delete from reviewreply where reviewno=#{reviewid}")
+	int deletereplypart (int reviewid);
 }

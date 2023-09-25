@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pack.product.model.ProductDto;
 import pack.review.model.ReviewDao;
 import pack.review.model.ReviewDto;
+import pack.reviewreply.model.ReviewReplyDao;
+import pack.reviewreply.model.ReviewReplyDto;
 
 @Controller
 public class ReviewListController {
 	@Autowired
 	ReviewDao reviewDao;
+	@Autowired
+	private ReviewReplyDao replyDao;
 	
 	private int tot; // 전체 레코드 수
 	private int plist = 10; // 페이지 당 행 수
@@ -70,6 +74,9 @@ public class ReviewListController {
 	public String showreview(@RequestParam("reviewid") int reviewid, @RequestParam("page") int page, Model model) {
 		model.addAttribute("data", reviewDao.detail(reviewid));
 		model.addAttribute("page", page);
+		// 댓글 조회
+		ArrayList<ReviewReplyDto> list = (ArrayList<ReviewReplyDto>) replyDao.selectAll(reviewid);
+		model.addAttribute("list", list);
 		
 		return "reviewdetail";
 	}

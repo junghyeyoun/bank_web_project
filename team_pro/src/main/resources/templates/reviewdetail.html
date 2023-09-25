@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<!-- 숫자를 별로 반환 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -20,18 +21,12 @@
             });
         });
     </script>
-    
+    <!-- 댓글 등록 -->
      <script type="text/javascript">
 		window.onload = function () {
 			let btnIns = document.getElementById("btnInsre");
 			btnIns.addEventListener("click", checkData);
 		function checkData() {
-			if (replyform.nickname.value === "") {
-				alert("닉네임을 입력하시오");
-				replyform.nickname.focus();
-				return;
-			}
-
 			if (replyform.comment.value === "") {
 				alert("댓글을 입력하시오");
 				replyform.comment.focus();
@@ -41,6 +36,89 @@
 		}
 }
 	</script>
+	<!-- 리뷰 삭제 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"  charset="UTF-8"></script>
+      <script th:inline="javascript">
+       /*<![CDATA[*/
+ 		$(document).ready(function() {
+			 $("#btnDel").click(function() {
+				 if(confirm("정말 삭제하시겠습니까? \n 삭제후 되돌릴 수 없습니다.")){
+				 $.ajax({
+					 type:"POST",
+					 url:"/reviewdelete", // ReviewDeleteController로 연결
+					 data : {reviewid:/*[[${data.reviewid}]]*/}, 
+					 success : function(response) {
+						 alert("삭제가 완료되었습니다."); // 리뷰목록으로 돌아가면 좋겠다					 
+					 },
+					 error:function() {
+						 alert("오류 발생");
+					 }
+				 });
+				 }
+			 });
+		 });
+        /*]]>*/
+    </script>
+    <!--댓글 수정 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="UTF-8"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+        $(".edit-reply-button").click(function() {
+           var replyid = $(this).data("replyid");
+           var $commentTextarea = $("#comment-textarea-" + replyid);
+           var originalContent = $commentTextarea.val();
+           
+            // 수정 버튼 클릭 시 해당 댓글에 대한 버튼 상태 변경
+            $(".delete-reply-button[data-replyid=" + replyid + "]").hide();
+            $(this).hide();
+            $(".save-reply-button[data-replyid=" + replyid + "]").show();
+            $(".cancel-reply-button[data-replyid=" + replyid + "]").show(); 
+            $commentTextarea.data("original-content", originalContent); 
+            		$(".cancel-reply-button[data-replyid=" + replyid + "]").click(function(){
+						 var replyid = $(this).data("replyid");
+        				 var $commentTextarea = $("#comment-textarea-" + replyid);
+
+        				// Replace the edited content with the original content
+        				$commentTextarea.val($commentTextarea.data("original-content"));
+
+       					// 댓글삭제와 댓글수정버튼 다시 보이게
+        				$(".delete-reply-button[data-replyid=" + replyid + "]").show();
+        				$(".edit-reply-button[data-replyid=" + replyid + "]").show();
+        				$(".save-reply-button[data-replyid=" + replyid + "]").hide();
+        				$(this).hide();
+					})
+             		$(".save-reply-button[data-replyid=" + replyid + "]").click(function(){
+						 var newContent = $("#comment-textarea-" + replyid).val(); // comment에 입력한 값 받기 
+						 if(confirm("정말 수정하시겠습니까?")) {
+							 $.ajax({
+								 type:"POST",
+								 url:"/replyupdate",
+								 data:{reviewno:/*[[${data.reviewid}]]*/,
+								 	   replyid:replyid,
+								 	   page:/*[[${page}]]*/,
+								 	   comment: newContent
+								 	   },
+								 success:function(response){
+									 alert("수정이 완료되었습니다.");
+									 // 댓글삭제와 댓글수정버튼 다시 보이게
+        							$(".delete-reply-button[data-replyid=" + replyid + "]").show();
+        							$(".edit-reply-button[data-replyid=" + replyid + "]").show();
+        							$(".cancel-reply-button[data-replyid=" + replyid + "]").hide();
+        							$(".save-reply-button[data-replyid=" + replyid + "]").hide();
+								 },
+								 error:function(){
+									 alert("오류 발생")
+								 }
+							 })
+						 }
+					 })
+			});
+        });
+    /*]]>*/
+</script>
+
+
    
 </head>
 <body>
@@ -80,48 +158,35 @@
 <form th:action="@{/reviewreplyinsert}" name="replyform" id="replyform" method="post">
 <input type="hidden" name="reviewno" th:value="${data.reviewid}" />
 <input type="hidden" name="page" th:value="${page}" />
-<input type="text" name="nickname"><br>
 <textarea type="text" name="comment" placeholder="댓글을 남겨주세요"></textarea><br>
 <input type="button" value="등록" id="btnInsre" />
 </form>
 <h5>댓글보기</h5>
-<table th:if="${list.size() > 0}" th:each="reply : ${list}">
+<table border="1" th:if="${list.size() > 0}" th:each="reply : ${list}">
+   <!-- 조인을 통해 판매자 정보 불러오기 -->
     <tr>
-        <td>닉네임</td>
-        <td th:text="${reply.nickname}"></td>
+        <td>등록일</td>
+        <td th:text="${reply.replydate}"></td>
     </tr>
     <tr>
         <td>내용</td>
-        <td th:text="${reply.comment}" readonly="readonly"></td>
+        <td>
+             <div class="comment-text">
+            <textarea th:text="${reply.comment}" th:id="'comment-textarea-' + ${reply.replyid}"></textarea>
+        	 </div>
+        </td>
+    </tr>
+    <tr>
+        <td><input hidden th:value="${page}" /></td>
+        <td>
+            <a th:href="@{/replydelete(replyid=${reply.replyid}, reviewno=${reply.reviewno}, page=${page})}" class="delete-reply-button" th:data-replyid="${reply.replyid}">댓글삭제</a>
+            <a href="javascript:void(0);" class="edit-reply-button" th:data-replyid="${reply.replyid}">댓글수정</a> 
+            <a href="javascript:void(0);" class="save-reply-button" th:data-replyid="${reply.replyid}" style="display: none;">완료</a>
+            <a href="javascript:void(0);" class="cancel-reply-button" th:data-replyid="${reply.replyid}" style="display: none;">취소</a>
+        </td>
     </tr>
 </table>
 
-
-	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"  charset="UTF-8"></script>
-      <script th:inline="javascript">
-       /*<![CDATA[*/
- 		$(document).ready(function() {
-			 $("#btnDel").click(function() {
-				 if(confirm("정말 삭제하시겠습니까? \n 삭제후 되돌릴 수 없습니다.")){
-				 $.ajax({
-					 type:"POST",
-					 url:"/reviewdelete", // ReviewDeleteController로 연결
-					 data : {reviewid:/*[[${data.reviewid}]]*/},  // 오류로 뜨지만 기능은 잘 작동함 왜그런지는 나도모름
-					 success : function(response) {
-						 alert("삭제가 완료되었습니다."); // 리뷰목록으로 돌아가면 좋겠다					 
-					 },
-					 error:function() {
-						 alert("오류 발생");
-					 }
-				 });
-				 }
-			 });
-		 });
-        /*]]>*/
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"  charset="UTF-8"></script>
-      <script th:inline="javascript">
-		  
-	</script>
+	 	
 </body>
 </html>

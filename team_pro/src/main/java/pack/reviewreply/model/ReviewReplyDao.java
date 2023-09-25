@@ -47,11 +47,20 @@ public class ReviewReplyDao {
 		return b;
 	}
 	
-	// 댓글 삭제
+	// 댓글 삭제 
 	public boolean delete(int replyid) {
 		boolean b = false;
 		int re = replyMappingInterface.deletereply(replyid);
 		if (re > 0)
+			b = true;
+		return b;
+	}
+	
+	// 리뷰 전체 삭제를 위해 특정 reviewid의 댓글 삭제해야함
+	public boolean deletepart(int reviewid) {
+		boolean b = false;
+		int re = replyMappingInterface.deletereplypart(reviewid);
+		if(re>0) 
 			b = true;
 		return b;
 	}

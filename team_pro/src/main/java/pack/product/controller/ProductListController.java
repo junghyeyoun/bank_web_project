@@ -44,7 +44,8 @@ public class ProductListController {
 
 	// 상품 리스트보기
 	@GetMapping("productlist")
-	public String showProductList(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+	public String showProductList(@RequestParam(name = "page", defaultValue = "1") int page, ProductBean bean,Model model) {
+		
 	    // paging 처리
 	    int spage = 0;
 	    try {
@@ -54,6 +55,9 @@ public class ProductListController {
 	    }
 	    if (page <= 0)
 	        spage = 1;
+	    
+	    // 만약 state가 "승인" 이라면 상품 리스트에 보이게 하기
+	    // if(bean.getState() == "승인") {
 
 	    ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.selectAll();
 	    ArrayList<ProductDto> result = getListdata(list, spage);
@@ -62,6 +66,9 @@ public class ProductListController {
 	    model.addAttribute("pagesu", getPageSu());
 	    model.addAttribute("page", spage);
 	    return "productlist";
+//	    } else {
+//	    	return "productwait";
+//	    }
 	}
 
 

@@ -9,7 +9,7 @@ import lombok.Data;
 @Component
 public class ProductBean {
 	private int productid;
-	private String category, brand, model, price, stockquantity, pimage, dimage;
+	private String category, brand, model, price, stockquantity, pimage, dimage, state;
 	// pimage, dimge는 이미지 파일명
 	
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pack.review.model.ReviewDao;
+import pack.reviewreply.model.ReviewReplyDao;
 
 
 @Controller
@@ -18,10 +19,13 @@ public class ReviewDeleteController {
 
 	    @Autowired
 	    private ReviewDao reviewDao;
+	    @Autowired
+	    private ReviewReplyDao replyDao;
 	    
 	    @PostMapping("/reviewdelete")
 	    public String delete(@RequestParam("reviewid") int reviewid) {
 			// review를 참고하는 다른 테이블있다면 거기서도 특정 reveiwid의 데이터들을 삭제한 뒤 진행해야함
+	    	replyDao.deletepart(reviewid);
 	    	reviewDao.delete(reviewid);
 			return "redirect:reviewlist";
 		}
