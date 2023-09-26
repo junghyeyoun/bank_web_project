@@ -12,8 +12,8 @@ import pack.product.controller.ProductBean;
 
 @Mapper
 public interface ProductMappingInterface {
-	// 전체 상품 읽기 - 판매자가 자신이 등록한 상품 보기 목록으로 바꿔도 좋을듯
-	@Select("SELECT * FROM products ORDER BY productid DESC")
+	// 전체 상품 읽기(관리자가 승인한 상품만 읽어오기) - 판매자가 자신이 등록한 상품 보기 목록으로 바꿔도 좋을듯
+	@Select("SELECT * FROM products where state='승인' ORDER BY productid DESC")
 	List<ProductDto> selectAll();
 
 	// 해당 상품 상세 보기

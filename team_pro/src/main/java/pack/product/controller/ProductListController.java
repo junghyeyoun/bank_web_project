@@ -55,9 +55,6 @@ public class ProductListController {
 	    }
 	    if (page <= 0)
 	        spage = 1;
-	    
-	    // 만약 state가 "승인" 이라면 상품 리스트에 보이게 하기
-	    // if(bean.getState() == "승인") {
 
 	    ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.selectAll();
 	    ArrayList<ProductDto> result = getListdata(list, spage);
@@ -65,10 +62,9 @@ public class ProductListController {
 	    model.addAttribute("list", result); 
 	    model.addAttribute("pagesu", getPageSu());
 	    model.addAttribute("page", spage);
+	    
 	    return "productlist";
-//	    } else {
-//	    	return "productwait";
-//	    }
+
 	}
 
 
