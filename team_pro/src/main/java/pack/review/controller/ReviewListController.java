@@ -80,27 +80,4 @@ public class ReviewListController {
 		
 		return "reviewdetail";
 	}
-	
-	// 상품별 리뷰 보기
-	@GetMapping("selectpart")
-	public String selectpart(@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam("rproductid") int rproductid, Model model) {
-	    // paging 처리
-	    int spage = 0;
-	    try {
-	        spage = page;
-	    } catch (Exception e) {
-	        spage = 1;
-	    }
-	    if (page <= 0)
-	        spage = 1;
-
-	    ArrayList<ReviewDto> list = (ArrayList<ReviewDto>) reviewDao.selectAll();
-	    ArrayList<ReviewDto> result = getListdata(list, spage);
-
-	    model.addAttribute("list", result); 
-	    model.addAttribute("pagesu", getPageSu());
-	    model.addAttribute("page", spage);
-	    return "reviewproductlist";
-	}
-	
 }

@@ -4,51 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>상품 상세보기</title>
-</head>
-
-<body>
-	<div>
-	<table>
-		<tr>
-			<td>category id : [[${data.category}]]</td>
-			<td>브랜드 : [[${data.brand}]]</td>
-			<td>모델 : [[${data.model}]]</td>
-			<td>가격 : [[${data.price}]] 원</td>
-			<td>재고량 : [[${data.stockquantity}]] 개</td>
-			<td> <img th:src="@{upload/}+${data.pimage}" /> </td>
-		</tr>
-		<tr>
-			<td><button>카트에 담기</button></td>
-			<td><button>주문하기</button></td>
-			<td><input type="button" value="찜하기" id="btnZZim"/></td>
-		<tr>
-			<td><a th:href="@{/reviewinsert(rproductid=${data.productid})}">리뷰쓰기</a></td>
-			<td><a th:href="@{/selectpart(rproductid=${data.productid}, page=${page})}">상품별 리뷰 보기</a> </td>
-		</tr>
-		</tr>
-		<!-- 상품삭제, 상품수정 상품이미지삭제, 상세이미지 삭제 (판매자에게만 보여주도록 함) -->
-		<tr>
-			<td><a
-					th:href="@{/productupdate(productid=${data.productid},page=${page},pimage=${data.pimage},dimage=${data.dimage})}">상품
-					수정</a></td>
-			<td>
-				<input type="button" value="상품삭제" id="btnDel" />
-			</td>
-		</tr>
-
-		<tr>
-			<td><a th:href="@{/pimagedelete(productid=${data.productid})}">상품이미지 삭제</a></td>
-			<td><a th:href="@{/dimagedelete(productid=${data.productid})}">상세이미지 삭제</a></td>
-		</tr>
-	</table>
-</div>
-	<br>
-	<div id="detailimage">
-		<h2>상품상세</h2>
-		<img th:src="@{upload/}+${data.dimage}" />
-	</div>
-
-
+	<link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/product.css" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="UTF-8"></script>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
@@ -74,26 +31,149 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="UTF-8"></script>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
-		$(document).ready(function (){
+		$(document).ready(function () {
 			$("#btnZZim").click(function () {
 				$.ajax({
-				type: "GET",
-				data: {productid:/*[[${data.productid}]]*/},
-				url: "wishlistinsert",
-				success : function (response) { 
-					alert("찜 성공!");
-                    if (confirm("찜목록으로 이동하시겠습니까?")) {
-                        window.location.href = "wishlist"; 
-                    }
-				},
-				error:function () {
-					alert("이미 찜이 된 상품입니다.");
-				}
+					type: "GET",
+					data: {productid:/*[[${data.productid}]]*/},
+					url: "wishlistinsert",
+					success: function (response) {
+						alert("찜 성공!");
+						if (confirm("찜목록으로 이동하시겠습니까?")) {
+							window.location.href = "wishlist";
+						}
+					},
+					error: function () {
+						alert("이미 찜이 된 상품입니다.");
+					}
 				})
 			})
 		})
 		/*]]>*/
 	</script>
+	<!-- 숫자를 별로 반환 -->
+	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("td.rating").each(function () {
+                var rating = parseInt($(this).text());
+                var stars = "";
+                for (var i = 1; i <= 5; i++) {
+                    if (i <= rating) {
+                        stars += "&#9733; ";
+                    } else {
+                        stars += "&#9734; ";
+                    }
+                }
+                $(this).html(stars);
+            });
+        });
+    </script>
+</head>
+
+<body>
+	<th:block th:replace="header::headerFragment"></th:block>
+	<div id="sub_con">
+		<div class="productdetail flex">
+			<div class="img">
+				<img th:src="@{upload/}+${data.pimage}" />
+			</div>
+			<div class="text_area">
+				<h2>[[${data.model}]]</h2>
+				<table>
+					<caption>
+						<details class="hide">
+							<summary>상품정보</summary>
+							카테고리, 브랜드, 재고량
+						</details>
+					</caption>
+					<colgroup>
+						<col style="width:px;">
+						<col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>카테고리</th>
+							<td>[[${data.category}]]</td>
+						</tr>
+						<tr>
+							<th>브랜드</th>
+							<td>[[${data.brand}]]</td>
+						</tr>
+						<tr>
+							<th>재고량</th>
+							<td>[[${data.stockquantity}]] 개</td>
+						</tr>
+						<tr>
+							<th>판매가</th>
+							<td class="price">[[${data.price}]] 원</td>
+						</tr>
+						<tr>
+							<th>구매수량</th>
+							<td><input type="number" min="1" value="1" /></td>
+						</tr>
+					</tbody>
+				</table>
+				<button id="btnZZim"><img src="images/찜하트.svg" alt="찜하기"/></button>
+				<input type="button">장바구니</input>
+				<input type="button">구매하기</input>
+
+			</div>
+		</div>
+		<!--
+		<a th:href="@{/reviewinsert(rproductid=${data.productid})}">리뷰쓰기</a>
+		
+			<a th:href="@{/selectpart(rproductid=${data.productid}, page=${page})}">상품별 리뷰 보기</a> 
+		
+		 상품삭제, 상품수정 상품이미지삭제, 상세이미지 삭제 (판매자에게만 보여주도록 함) 
+		<tr>
+			<td><a
+					th:href="@{/productupdate(productid=${data.productid},page=${page},pimage=${data.pimage},dimage=${data.dimage})}">상품
+					수정</a></td>
+			<td>
+				<input type="button" value="상품삭제" id="btnDel" />
+			</td>
+		</tr>
+
+		<tr>
+			<td><a th:href="@{/pimagedelete(productid=${data.productid})}">상품이미지 삭제</a></td>
+			<td><a th:href="@{/dimagedelete(productid=${data.productid})}">상세이미지 삭제</a></td>
+		</tr>-->
+
+		<div class="tab-content">
+			<a class="tab-button active" href="#detailimage">상품상세</a>
+			<a class="tab-button" href="#review">리뷰</a>
+		</div>
+		<div class="detailimage" id="detailimage">
+			<img th:src="@{upload/}+${data.dimage}" />
+		</div>
+		<div class="review" id="review">
+			<h2>상품리뷰</h2>
+		<table border="1">
+				<tr>
+					<th>상품id</th>
+					<th>모델</th>
+					<th>브랜드</th>
+					<th>별점</th>
+					<th>등록일</th>
+					<th>상세보기</th>
+				</tr>
+				<tr th:if="${list.size() > 0}" th:each="rdata : ${list}">
+					<td th:text="${rdata.rproductid}"></td>
+					<td th:text="${rdata.model}"></td>
+					<td th:text="${rdata.brand}"></td>
+					<td class="rating" th:text="${rdata.rating}"></td>
+					<td th:text="${rdata.reviewdate}"></td>
+					<td>
+						<a th:href="@{/showreview(reviewid=${rdata.reviewid},page=${page})}" th:text="상세보기"></a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	</div>
+
+	<th:block th:replace="footer::footerFragment"></th:block>
 
 </body>
 

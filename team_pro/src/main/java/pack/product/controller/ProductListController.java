@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import pack.product.model.ProductDao;
 import pack.product.model.ProductDto;
+import pack.review.model.ReviewDao;
+import pack.review.model.ReviewDto;
 
 @Controller
 public class ProductListController {
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	ReviewDao reviewDao;
 
 	private int tot; // 전체 레코드 수
 	private int plist = 10; // 페이지 당 행 수
@@ -73,6 +77,15 @@ public class ProductListController {
 	public String showproduct(@RequestParam("productid") int productid, @RequestParam("page") String page, Model model) {
 		model.addAttribute("data", productDao.detail(productid));
 		model.addAttribute("page", page);
+		
+		// 상품별 리뷰 보기
+		ArrayList<ReviewDto> list = (ArrayList<ReviewDto>) reviewDao.selectPart(productid);
+		model.addAttribute("list", list); 
+		
+		 // 리뷰가 없을 경우 메시지 추가
+	    if (list.isEmpty()) {
+	        model.addAttribute("noReviews", "리뷰가 없습니다.");
+	    }
 		
 		return "productdetail";
 	}
