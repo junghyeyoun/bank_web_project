@@ -13,21 +13,21 @@ import pack.review.controller.ReviewBean;
 @Mapper
 public interface ReviewMappingInterface {
 	// 리뷰 등록
-	@Insert("INSERT INTO reviews (rproductid, nickname, title,rating, comment, reviewdate, rimage)\r\n"
-			+ "VALUES (#{rproductid}, #{nickname}, #{title},#{rating}, #{comment}, #{reviewdate} ,#{rimage})")
+	@Insert("INSERT INTO reviews (rproductid, title,rating, comment, reviewdate, rimage)\r\n"
+			+ "VALUES (#{rproductid}, #{title},#{rating}, #{comment}, #{reviewdate} ,#{rimage})")
 	int insertReview(ReviewBean bean);
 
-	// 리뷰 목록 보기 - 사용자별추가하는게 좋을 것 같음
+	// 리뷰 목록 보기 - 구매자 별(자신이 남긴 리뷰) / 판매자 별(자신의 상품에 대한 리뷰)
 	// products table의 model,brand를 가져오기 위해 join 사용
-	@Select("select rproductid, reviewid, nickname, title ,model, brand, rating, comment, reviewdate from reviews left outer join products on rproductid = productid order by reviewid desc")
+	@Select("select rproductid, reviewid, rnickname, title ,model, brand, rating, comment, reviewdate from reviews left outer join products on rproductid = productid order by reviewid desc")
 	List<ReviewDto> selectAll();
 
 	// 해당 리뷰 자세히 보기
-	@Select("select rproductid, reviewid, nickname, title, model, brand, rating, comment, reviewdate, rimage from reviews left outer join products on rproductid = productid where reviewid = #{reviewid}")
+	@Select("select rproductid, reviewid, rnickname, title, model, brand, rating, comment, reviewdate, rimage from reviews left outer join products on rproductid = productid where reviewid = #{reviewid}")
 	ReviewDto selectOne(int reviewid);
 	
 	// 상품별 리뷰 보기
-	@Select("select rproductid, reviewid, nickname, title, model, brand, rating, comment, reviewdate, rimage from reviews left outer join products on rproductid = productid where rproductid = #{rproductid} order by reviewid desc")
+	@Select("select rproductid, reviewid, rnickname, title, model, brand, rating, comment, reviewdate, rimage from reviews left outer join products on rproductid = productid where rproductid = #{rproductid} order by reviewid desc")
 	List<ReviewDto> selectPart(int productid); 
 	
 	// 상품별 리뷰 평균 보기
@@ -42,7 +42,7 @@ public interface ReviewMappingInterface {
 	int totalCnt();
 
 	// 리뷰 수정
-	@Update("update reviews set nickname=#{nickname}, title=#{title}, rating=#{rating}, comment=#{comment}, reviewdate=#{reviewdate}, rimage=#{rimage} where reviewId=#{reviewid}")
+	@Update("update reviews set rnickname=#{rnickname}, title=#{title}, rating=#{rating}, comment=#{comment}, reviewdate=#{reviewdate}, rimage=#{rimage} where reviewId=#{reviewid}")
 	int updateReview(ReviewBean bean);
 
 	// 리뷰 삭제

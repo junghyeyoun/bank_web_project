@@ -2,27 +2,75 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>찜목록</title>
+    <link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/wishlist_imsi.css" />
+	
 </head>
 <body>
-<h3>찜목록</h3>
-<br>
-<table>
-	<tr><th>브랜드</th><th>모델</th><th>상품이미지</th><th>상세보기</th></tr>
-	<tr th:if="${list.size() > 0}" th:each="data : ${list}">
-		<td th:text="${data.brand}"></td>
-            <td th:text="${data.model}"></td>
-            <td> <img th:src="@{upload/}+${data.pimage}" /> </td>
-            <td>
-                <a th:href="@{/showproduct(productid=${data.productid},page=${page})}" th:text="상세보기"></a>
-            </td>
-            <td>
-				<a th:href="@{/deletewishlist(wishlistid=${data.wishlistid},page=${page})}">찜 삭제</a>
-            </td>
-	</tr>
-	 <!-- paging -->
-        <tr style="text-align: center;">
-            <td colspan="5">
+<th:block th:replace="header::headerFragment"></th:block>
+<div id="sub_con">
+		<div class="sub_left">
+			<p class="sub_left_title">마이페이지</p>
+			<ul>
+				<li class="active">
+					<a href="orderlist" class="flex">
+						<p>주문내역</p>
+						<span class="material-symbols-outlined arrow_icon"> arrow_forward_ios</span>
+					</a>
+				</li>
+				<li>
+					<a href="update">
+						<p>내 정보 수정하기</p>
+						<span class="material-symbols-outlined arrow_icon"> arrow_forward_ios</span>
+					</a>
+				</li>
+				<li>
+					<a href="delete">
+						<p>탈퇴하기</p>
+						<span class="material-symbols-outlined arrow_icon"> arrow_forward_ios</span>
+					</a>
+				<li>
+					<a href="reviewlist">
+						<p>상품후기</p>
+						<span class="material-symbols-outlined arrow_icon"> arrow_forward_ios</span>
+					</a>
+				</li>
+				<li>
+					<a href="update">
+						<p>배송지수정</p>
+						<span class="material-symbols-outlined arrow_icon"> arrow_forward_ios</span>
+					</a>
+				</li>
+				<li>
+					<a href="wishlist">
+						<p>찜목록</p>
+						<span class="material-symbols-outlined arrow_icon"> arrow_forward_ios</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+<div class="sub_right">
+				<div class="sub_right_title">
+					<h2>찜목록</h2>
+					<div class="line"></div>
+				</div>
+	<div class="zzim_list">
+	<form th:if="${list.size() > 0}" th:each="data : ${list}">
+		<div class="zzim_img">
+		<a th:href="@{/showproduct(productid=${data.productid},page=${page})}">
+		<img th:src="@{upload/}+${data.pimage}" /> </a>
+		</div>
+		<p class="brd_name" th:text="${data.brand}"/>
+        <p class="prd_name" th:text="${data.model}"/>
+         
+		<a th:href="@{/deletewishlist(wishlistid=${data.wishlistid},page=${page})}"><span class="material-symbols-outlined">delete</span></a>
+           
+	</form>
+	</div>
+	<br><br><br><br>
+	  <!-- paging --> 
+	  <div class="paging">
                 <span th:each="num : ${#numbers.sequence(1, pagesu)}">
     <span th:if="${num == page}">
         <b th:text="${num}">num 표시(현재 페이지는 링크를 걸지 않음)</b>
@@ -31,9 +79,13 @@
         <a th:href="@{wishlist(page=${num})}" th:text="${num}">num 표시</a>
     </span>
 </span>
+	  </div>
             </td>
         </tr>
         
 </table>
+	</div>
+</div>
+<th:block th:replace="footer::footerFragment"></th:block>
 </body>
 </html>

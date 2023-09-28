@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ReviewReplyBean {
 	private int replyid, reviewno;
-	private String nickname, title, comment, replydate;
+	private String renickname, title, comment, replydate;
 	public void setReplydate() {
 		LocalDate localDate = LocalDate.now();
 		int year = localDate.getYear();

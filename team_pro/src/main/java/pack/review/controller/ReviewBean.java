@@ -8,7 +8,8 @@ import lombok.Data;
 
 @Data
 public class ReviewBean {
-	private String nickname, title, rating, comment, reviewdate, rimage,  model, brand;
+	// renickname은 session에서 받은 nickname
+	private String rnickname, title, rating, comment, reviewdate, rimage,  model, brand;
 	private int rproductid , reviewid;
 	private MultipartFile rimagePath;
 	public void setReviewdate() {

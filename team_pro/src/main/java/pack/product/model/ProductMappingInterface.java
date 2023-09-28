@@ -12,7 +12,7 @@ import pack.product.controller.ProductBean;
 
 @Mapper
 public interface ProductMappingInterface {
-	// 전체 상품 읽기(판매자)
+	// 전체 상품 읽기(판매자) // where nickname=#{nickname} and isseller = TRUE 
 	@Select("SELECT * FROM products ORDER BY productid DESC")
 	List<ProductDto> selectAll();
 

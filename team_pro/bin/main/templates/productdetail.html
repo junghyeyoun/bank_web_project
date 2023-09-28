@@ -130,12 +130,12 @@
 						</tr>
 					</tbody>
 				</table>
-				<button id="btnZZim"><span class="material-symbols-outlined">favorite</span></button>
-				<input type="button">장바구니</input>
-				<input type="button">구매하기</input>
+				<button class="btnZZim" id="btnZZim"><span class="material-symbols-outlined">favorite</span></button>&nbsp;
+				<input class="button gray" type="button" value="장바구니"></input>&nbsp;&nbsp;
+				<input class="button gray" type="button" value="구매하기"></input>
 
 			</div>
-			</div>
+		</div>
 		<!-- 주문내역에서 리뷰쓰는거 만들면 지울 예정 -->
 		<a th:href="@{/reviewinsert(rproductid=${data.productid})}">리뷰쓰기</a>
 		<!-- 상품삭제, 상품수정 상품이미지삭제, 상세이미지 삭제 (판매자에게만 보여주도록 함)-->
@@ -156,30 +156,31 @@
 			<a class="tab-button" href="#review">리뷰</a>
 		</div>
 		<div class="detailimage" id="detailimage">
+			<h2>상품 상세</h2>
 			<img th:src="@{upload/}+${data.dimage}" />
 		</div>
 		<div class="review" id="review">
 			<h2>상품리뷰</h2>
 			<br><br>
-				<div class="noreview" th:if="${list.size() == 0}" th:text="${noReviews}"></div>
+			<hr><br>
 				<p class="avgstar" th:text="${avgstar}"> <!--평점-->
+				<div class="noreview" th:if="${list.size() == 0}" th:text="${noReviews}"></div>			
 				<div th:if="${list.size() > 0}" th:each="rdata : ${list}">
-					<div>
-					<p th:text="${rdata.nickname}"/>
+				<div class="yesreview">
+					<div class="review_left">
 					<p class="rating" th:text="${rdata.rating}"/>
+					<!-- 세션으로 닉네임 가져오기 --><p>닉네임</p>
 					<p th:text="${rdata.reviewdate}"/>
 					</div>
-					<div class="reviewtext">
+					<div class="review_right">
 					<textarea th:text="${rdata.comment}" readonly="readonly"></textarea>
+					<a th:href="@{/showreview(reviewid=${rdata.reviewid},page=${page})}" th:text="상세보기"></a>
 					</div>
-					<td>
-						<a th:href="@{/showreview(reviewid=${rdata.reviewid},page=${page})}" th:text="상세보기"></a>
-					</td>
 				</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	</div>
-	
 
 	<th:block th:replace="footer::footerFragment"></th:block>
 
