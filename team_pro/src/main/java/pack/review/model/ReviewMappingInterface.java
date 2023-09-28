@@ -30,6 +30,13 @@ public interface ReviewMappingInterface {
 	@Select("select rproductid, reviewid, nickname, title, model, brand, rating, comment, reviewdate, rimage from reviews left outer join products on rproductid = productid where rproductid = #{rproductid} order by reviewid desc")
 	List<ReviewDto> selectPart(int productid); 
 	
+	// 상품별 리뷰 평균 보기
+	@Select("SELECT AVG(rating) AS average_rating\r\n"
+			+ "FROM reviews\r\n"
+			+ "WHERE rproductid = #{rpoductid};\r\n"
+			+ "")
+	int avgreviewstar(int rpoductid);
+	
 	// 총 리뷰 수 구하기 (페이징 처리를 위해)
 	@Select("select count(*) from reviews")
 	int totalCnt();
@@ -45,6 +52,6 @@ public interface ReviewMappingInterface {
 	// rimage 삭제(null 값으로 update 하기)
 	@Update("update reviews set rimage=null where reviewid = #{reviewid}")
 	int rimagedelete(int reviewid);
-
+	
 	
 }

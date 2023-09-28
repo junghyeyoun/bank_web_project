@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Component
 public class ProductBean {
-	private int productid, reviewid;
+	private int productid, reviewid, customernum;
 	private String category, brand, model, price, stockquantity, pimage, dimage, state;
 	// pimage, dimge는 이미지 파일명
 	

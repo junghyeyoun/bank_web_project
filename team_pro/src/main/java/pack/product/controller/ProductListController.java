@@ -46,8 +46,8 @@ public class ProductListController {
 		return pagesu;
 	}
 
-	// 상품 리스트보기
-	@GetMapping("productlist")
+	// 상품 리스트보기(판매자)
+	@GetMapping("productlist_seller")
 	public String showProductList(@RequestParam(name = "page", defaultValue = "1") int page, ProductBean bean,Model model) {
 		
 	    // paging 처리
@@ -67,9 +67,33 @@ public class ProductListController {
 	    model.addAttribute("pagesu", getPageSu());
 	    model.addAttribute("page", spage);
 	    
-	    return "productlist";
+	    return "productlist_seller";
 
 	}
+	
+	// 카테고리별 상품 보기(사용자)
+		@GetMapping("productcategorylist")
+		public String showProductCategoryList(@RequestParam(name = "page", defaultValue = "1") int page,
+				@RequestParam("category") String category,Model model) {
+		    // paging 처리
+		    int spage = 0;
+		    try {
+		        spage = page;
+		    } catch (Exception e) {
+		        spage = 1;
+		    }
+		    if (page <= 0)
+		        spage = 1;
+
+		    ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.selectCatogory(category);
+		    ArrayList<ProductDto> result = getListdata(list, spage);
+
+		    model.addAttribute("list", result); 
+		    model.addAttribute("pagesu", getPageSu());
+		    model.addAttribute("page", spage);
+		    return "productlist";
+		}
+		
 
 
 	// 선택한 상품 자세히 보기
@@ -80,17 +104,22 @@ public class ProductListController {
 		
 		// 상품별 리뷰 보기
 		ArrayList<ReviewDto> list = (ArrayList<ReviewDto>) reviewDao.selectPart(productid);
-		model.addAttribute("list", list); 
+		
 		
 		 // 리뷰가 없을 경우 메시지 추가
 	    if (list.isEmpty()) {
 	        model.addAttribute("noReviews", "리뷰가 없습니다.");
+	        model.addAttribute("list", list);
+	    } else {
+	    	model.addAttribute("list", list); 
+	        // 상품별 리뷰 별점 평균
+	        int avgstar = reviewDao.avgreviewstar(productid);
+	        model.addAttribute("avgstar", avgstar);
 	    }
-		
 		return "productdetail";
 	}
 	
-	// 상품 검색하기
+	// 상품 검색하기 - 관리자
 	@GetMapping("productsearch")
 	public String searchProcess(ProductBean bean, Model model) {
 	    System.out.println(bean.getSearchName() + " " + bean.getSearchValue()); // 검색 파라미터 확인용
@@ -100,31 +129,9 @@ public class ProductListController {
 	    model.addAttribute("list", list);
 	    model.addAttribute("pagesu", getPageSu());
 	    model.addAttribute("page", "1");
-	    return "productlist";
+	    return "productlist_seller";
 	}
 	
-	// 카테고리별 상품 보기
-	@GetMapping("productcategorylist")
-	public String showProductCategoryList(@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam("category") String category,Model model) {
-	    // paging 처리
-	    int spage = 0;
-	    try {
-	        spage = page;
-	    } catch (Exception e) {
-	        spage = 1;
-	    }
-	    if (page <= 0)
-	        spage = 1;
-
-	    ArrayList<ProductDto> list = (ArrayList<ProductDto>) productDao.selectCatogory(category);
-	    ArrayList<ProductDto> result = getListdata(list, spage);
-
-	    model.addAttribute("list", result); 
-	    model.addAttribute("pagesu", getPageSu());
-	    model.addAttribute("page", spage);
-	    return "productlist";
-	}
 	
 
 }

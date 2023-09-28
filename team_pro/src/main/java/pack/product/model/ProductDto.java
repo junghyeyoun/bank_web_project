@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class ProductDto {
-	private int productid, reviewid;
+	private int productid, reviewid, customernum;
 	private String category, brand, model, price, stockquantity, pimage, dimage, state;
 // pimage, dimge는 이미지 파일명
 

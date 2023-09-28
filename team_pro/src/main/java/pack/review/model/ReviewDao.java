@@ -44,6 +44,12 @@ public class ReviewDao {
 		List<ReviewDto> list = reviewMappingInterface.selectPart(rproductid);
 		return list;
 	}
+	
+	// 상품별 리뷰 평균 보기
+	public int avgreviewstar(int rproductid) {
+		int re = reviewMappingInterface.avgreviewstar(rproductid);
+		return re;
+	}
 
 	public int totalCnt() {
 		return reviewMappingInterface.totalCnt();
